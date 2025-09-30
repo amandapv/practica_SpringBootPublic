@@ -24,18 +24,5 @@ public class HomeController {
 
         return "indexView";    // vista que devuelve
     }
-
-    @GetMapping("/app")            // ruta a la que responde por GET
-    public String showHomePalmares( 
-            @RequestParam(required = false, defaultValue = "X") String userName, 
-            Model model) {
-            
-            LocalDate fecha = LocalDate.now();
-            
-            model.addAttribute("date", fecha.getYear());
-            model.addAttribute("nombre", userName);
-
-        return "indexView";    // vista que devuelve
-    }
     
 }
