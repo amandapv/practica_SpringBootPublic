@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/app")
 
-public class FotosController {
+public class PalmaresController {
     @RequestMapping({"/", "/index", "home"})
     public String getList() {
         // proceso

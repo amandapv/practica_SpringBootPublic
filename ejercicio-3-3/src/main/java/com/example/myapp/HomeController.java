@@ -10,10 +10,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller // anotación controlador
 public class HomeController {
     
-    @GetMapping("/")            // ruta a la que responde por GET
+    @GetMapping({"/", "/home", "/app"})            // ruta a la que responde por GET
     public String showHome( 
 
 
+            @RequestParam(required = false, defaultValue = "X") String userName, 
+            Model model) {
+            
+            LocalDate fecha = LocalDate.now();
+            
+            model.addAttribute("date", fecha.getYear());
+            model.addAttribute("nombre", userName);
+
+        return "indexView";    // vista que devuelve
+    }
+
+    @GetMapping("/app")            // ruta a la que responde por GET
+    public String showHomePalmares( 
             @RequestParam(required = false, defaultValue = "X") String userName, 
             Model model) {
             
