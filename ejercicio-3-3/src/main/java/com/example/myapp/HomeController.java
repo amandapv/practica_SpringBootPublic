@@ -20,9 +20,7 @@ public class HomeController {
             LocalDate fecha = LocalDate.now();
             
             model.addAttribute("date", fecha.getYear());
-
-
-
+            model.addAttribute("nombre", userName);
 
         return "indexView";    // vista que devuelve
     }
