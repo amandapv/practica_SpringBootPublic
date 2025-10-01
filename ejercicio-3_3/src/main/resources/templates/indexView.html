@@ -2,11 +2,13 @@
 <html lang="es">
 <head th:replace="~{/fragmentos.html::cabecera}"></head>
 <body>
-  <nav th:replace="~{/fragmentos.html::menu}"></nav>
   <h1>Bienvenido - ejercicio 3.3</h1>
+
+  <p>El/la profesor/a: <span th:text="${nombre}">nombre por defecto</span> </p>
+
   <br><br>
 
-  <p>El profesor <span th:text="${nombre}">nombre por defecto</span> </p>
+  <nav th:replace="~{/fragmentos.html::menu}"></nav>
 
   <br><br>
   <p> © <span th:text="${date}"> fecha actual</span> </p>
