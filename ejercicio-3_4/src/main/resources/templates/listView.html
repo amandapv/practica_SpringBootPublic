@@ -12,7 +12,8 @@
           <thead><tr><th>Numero</th><th>Operación</th></tr></thead>
           <tbody>
         	 <tr th:each="numero : ${listaNumeros}">
-        	    <td  th:text="${numero}">33</td>
+        	    <td  th:text="${numero}">numero</td>
+              <td th:if> </td>
               <td><a th:href="@{/delete/{id}(id=${numero})}">delete</a></td>        		
              </tr>
           </tbody>
