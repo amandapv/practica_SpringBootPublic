@@ -10,6 +10,6 @@ public class webMvcConfigController implements WebMvcConfigurer{
     @Override
 
     public void addViewControllers (ViewControllerRegistry registry) {
-        
+        registry.addViewController("/app/enlaces-externos").setViewName("linksView");
     }
 }

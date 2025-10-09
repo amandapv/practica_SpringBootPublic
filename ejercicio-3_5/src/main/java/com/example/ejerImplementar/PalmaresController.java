@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,7 @@ public class PalmaresController {
 
     @GetMapping("/palmares")
     public String palmares(Model model) {
-        List<String> listaPalmares = new ArrayList<>(Arrays.asList("6ª EDICIÓN PREMIO SILOS DE RELATOS CORTOS", "CONCURSO LITERARIO: MACONDOS DEL SIGLO XXI 2025", "I PREMIO UNIR – CÁTEDRA VARGAS LLOSA DE RELATO BREVE"));
+        List<String> listaPalmares = new ArrayList<>(Arrays.asList("Segunda División", "Segunda División B", "Tercera División", "Trofeo Ciudad de Vigo", "Trofeo Colombino", "Trofeo Teresa Herrera"));
         // proceso
         model.addAttribute("listPalmares", listaPalmares);
         return "palmaresView";
