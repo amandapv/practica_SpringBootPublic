@@ -9,8 +9,13 @@
   </head>
   <body>
         <h1>Listado de numeros aleatorios</h1>
-        <table border="1px">
-          <thead th:style="${listaNumeros == null && listaNumeros.isEmpty()} ? 'display:block' : 'display:none'"><tr><th>Numero</th><th>Operación</th></tr></thead>
+        <table border="1px" th:style="${listaNumeros != null && !listaNumeros.isEmpty()} ? 'visibility: visible' : 'visibility: hidden'">
+          <thead >
+            <tr>
+              <th>Numero</th>
+              <th>Operación</th>
+            </tr>
+          </thead>
           <tbody>
         	 <tr th:each="numero : ${listaNumeros}">
         	    <td th:classappend="${numero > 50 } ? 'highNumberVerde' : 'lowNumberRojo'" th:text="${numero}" >numero</td>
