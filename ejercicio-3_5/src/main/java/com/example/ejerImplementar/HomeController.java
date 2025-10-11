@@ -14,7 +14,7 @@ public class HomeController {
     public String showHome( 
 
 
-            @RequestParam(required = false, defaultValue = "X") String userName, Model model) {
+            @RequestParam(required = false, defaultValue = "") String userName, Model model) {
             
             LocalDate fecha = LocalDate.now();
             
