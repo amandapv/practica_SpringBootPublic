@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/app")
 
 public class PalmaresController {
-    @RequestMapping({"/", "/index", "home"})
+    @RequestMapping({"/", "/index", "/home"})
     public String getList() {
         // proceso
         return "indexView";
