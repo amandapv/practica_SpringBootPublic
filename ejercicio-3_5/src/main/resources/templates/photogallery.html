@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<head th:replace="~{/fragmentos.html::cabecera}"></head>
 <body>
+    <nav th:replace="~{/fragmentos.html::menu}"></nav> <br>
+
     <h3>Listado imágenes de títulos del Palmarés del Celta</h3>
         
     <ul>
@@ -15,7 +13,6 @@
         <h4>Trofeo Ciudad de Vigo: <img th:src="@{/trofeo_ciudad_vigo.png}" alt=""> </h4>
         <h4>Trofeo Colombino: <img th:src="@{/trofeo_colombino.png}" alt=""> </h4>
         <h4>Trofeo Teresa Herrera: <img th:src="@{/trofeo_teresa_herrera.png}" alt=""> </h4>
-
     </ul>
 </body>
 </html>
