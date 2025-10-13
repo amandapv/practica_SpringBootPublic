@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>ejercicio-3_6</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>votacionPeliculaFav</name>
+	<name>votacion_pelicula_fav</name>
 	<description>Desarrollo Web Entorno Servidor. Editorial Garceta</description>
 	<properties>
 		<java.version>21</java.version>

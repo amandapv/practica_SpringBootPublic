@@ -34,6 +34,6 @@ public class NumerosController {
     @GetMapping("/delete/{id}")
     public String showDelete(@PathVariable Integer id) {
         lista.remove(id);
-        return "redirect:/list";
+        return "redirect:/list"; //redirect a la home /list
     }
 }
