@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class NumerosController {
     Random random = new Random();
-    public Set<Integer> lista = new LinkedHashSet<>();
+    private Set<Integer> lista = new LinkedHashSet<>();
 
     @GetMapping({ "/", "/list", "" })
     public String showList(Model model) {
