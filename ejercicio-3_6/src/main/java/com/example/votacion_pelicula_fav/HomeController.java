@@ -14,8 +14,10 @@ public class HomeController {
     
 
     @GetMapping({"/", "/home"})            // ruta a la que responde por GET
-    public String showHome( ) {
-               
+    public String showHome(Model model) {
+        
+        model.addAttribute("listaFotos", listadoFotos); //parseo para que muestre el contador en la home
+
         return "indexView";    // vista que devuelve
     }
 
