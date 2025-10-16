@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller // anotación controlador
 public class HomeController {
     
+    //PENDIENTE A REVISAR --- TIENE QUE PERMITIR METER DOS NUMEROS Y AHORA SOLO PERMITE UNO Y PASA AL SIGUIENTE
+    
     boolean sumaPulsado = false;
     Long operando1;
     Long operando2;
