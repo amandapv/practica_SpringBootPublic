@@ -1,9 +1,5 @@
 package com.example.numleatoriosnuevo.controllers;
 
-import java.util.LinkedHashSet;
-import java.util.Random;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +16,6 @@ public class NumerosController {
 
     private String txtStatus = null;
 
-    // Random random = new Random();
-    // private Set<Integer> lista = new LinkedHashSet<>();
-
     @GetMapping({ "/", "/list", "" })
     public String showList(Model model) {
         model.addAttribute("cantidadTotal", numAleatoriosService.getList().size());
@@ -38,11 +31,6 @@ public class NumerosController {
 
     @GetMapping("/new")
     public String showNew() {
-        
-        // boolean añadido;
-        // do {
-        //     añadido = lista.add(random.nextInt(100) + 1);
-        // } while (!añadido);
         numAleatoriosService.addNum(); //la lista almacena el listado que retorna mi método showNew()
         return "redirect:/list";
     }
@@ -58,8 +46,7 @@ public class NumerosController {
         } catch (Exception ex) {
             txtStatus = ex.getMessage();
         }
-        
-        // lista.remove(id);
+    
         return "redirect:/list"; //redirect a la home /list
     }
 }

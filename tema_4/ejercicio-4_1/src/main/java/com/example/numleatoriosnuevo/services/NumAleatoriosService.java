@@ -4,8 +4,6 @@ import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Service;
 
 @Service
