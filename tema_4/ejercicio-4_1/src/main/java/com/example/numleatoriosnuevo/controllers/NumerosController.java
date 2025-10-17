@@ -14,7 +14,7 @@ public class NumerosController {
     @Autowired
     private NumAleatoriosService numAleatoriosService;
 
-    private String txtStatus = null;
+    private String txtStatus;
 
     @GetMapping({ "/", "/list", "" })
     public String showList(Model model) {
