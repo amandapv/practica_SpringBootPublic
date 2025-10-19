@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>Resultado hipotenusa</title>
+  </head>
+  <body>
+     <p class="alert alert-primary" role="alert">
+      <span class="fw-bold">Resultado del número <span th:text="${numeroPrimo}">numero</span></span>: <span  th:text="${resultado} ? 'Es primo' : 'No es primo' ">resultado</span>
+    </p>
+   </body>
+</html>

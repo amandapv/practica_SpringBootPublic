@@ -1,0 +1,14 @@
+<body>
+  <nav th:fragment="menu" class="navbar navbar-expand-sm">\
+    <div>
+      <h1>Cálculos automáticos</h1>
+
+      <a th:href="@{/calculos/primo?numCalcPrimo=7}"> Calculos - primo 7 </a><br/>
+      <a th:href="@{/calculos/primo?numCalcPrimo=8}"> Calculos - primo 8 </a><br/>
+      <a th:href="@{/calculos/primo}"> Calculos - error (sin numero)</a><br/>
+      <a th:href="@{/calculos/calcularHipotenusa/3/5}"> Calculos - hipotenusa 3/5 </a><br/>
+      <a th:href="@{/calculos/calcularHipotenusa/-3/5}"> Calculos - hipotenusa -3/5 </a><br/>
+      <a th:href="@{/calculos/divisores/20}"> Calculos - divisores 20 </a><br/>
+    </div>
+  </nav>
+</body>
