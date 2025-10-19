@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Calcular hipotenusa</title>
+</head>
+
+<body>
+  <nav th:replace="~{/menu.html::menu}"></nav> <!-- inserto un menú con números ya añadidos a las rutas para comprobar la ejecución del código  -->
+
+  <hr> <br><br>
+
+  <div>
+    <h3>Cálculos de hipotenusa:</h3>
+    Cateto 1:<input type="text" id="cateto1" />
+    Cateto 2:<input type="text" id="cateto2" />
+    <button onclick="calcularHipotenusa()">Calcular</button>
+
+    <script>
+      function calcularHipotenusa() {
+        var cateto1 = document.querySelector("#cateto1").value;
+        var cateto2 = document.querySelector("#cateto2").value;
+        window.location.href = "/calculos/calcularHipotenusa/" + cateto1 + "/" + cateto2;
+      }
+    </script>
+  </div>
+
+  <br><br><br>
+
+  <div>
+    <h3>Cálculo de un número primo:</h3>
+
+    <label for="primo">Número primo:</label>
+    <input type="text" name="primo" id="primo">
+
+    <button onclick="calcularPrimo()">Calcular</button>
+
+    <script>
+      function calcularPrimo() {
+        var numPrimo = document.querySelector("#primo").value;
+        window.location.href = "/calculos/primo?numCalcPrimo=" + numPrimo;
+      }
+    </script>
+  </div>
+
+  <br><br><br>
+
+  <div>
+    <h3>Cálculo de los divisores de un número:</h3>
+
+    <label for="numeroDiv">Número:</label>
+    <input type="text" name="numeroDiv" id="numeroDiv">
+
+    <button onclick="calcularDivisor()">Calcular</button>
+
+    <script>
+      function calcularDivisor() {
+        var numeroDivisor = document.querySelector("#numeroDiv").value;
+        window.location.href = "/calculos/divisores/" + numeroDivisor;
+      }
+    </script>
+  </div>
+
+</body>
+
+</html>
