@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{/fragmentos.html::cabecera}"></head>
+<body>
+  <nav th:replace="~{/fragmentos.html::menu}"></nav>
+  
+  <br><br>
+  <h1>Bienvenido - ejercicio 3.5</h1>
+
+  <p>Bienvenido a nuestra web <span th:text="${nombre}">nombre por defecto</span> </p>
+
+  <br><br>
+  <p> © <span th:text="${date}"> fecha actual</span> </p>
+</body>
+</html>

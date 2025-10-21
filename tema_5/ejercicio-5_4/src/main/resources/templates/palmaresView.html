@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{/fragmentos.html::cabecera}"></head>
+<body>
+    <nav th:replace="~{/fragmentos.html::menu}"></nav> <br>
+
+    <h3>Títulos en el palmarés del Celta</h3>
+    
+    <ul th:each="palmares:${listPalmares}">
+        <li th:text="${palmares}">lista de palmarés</li>
+    </ul>
+</body>
+</html>
