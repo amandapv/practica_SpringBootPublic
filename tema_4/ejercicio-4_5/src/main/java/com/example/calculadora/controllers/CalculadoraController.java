@@ -11,7 +11,6 @@ import com.example.calculadora.interfaces.CalculadoraService;
 @Controller // anotación controlador
 public class CalculadoraController {
     
-    //PENDIENTE A REVISAR --- TIENE QUE PERMITIR METER DOS NUMEROS Y AHORA SOLO PERMITE UNO Y PASA AL SIGUIENTE
     @Autowired
     private CalculadoraService calculadoraService; //llamo a la interfaz
  
@@ -37,7 +36,6 @@ public class CalculadoraController {
 
         model.addAttribute("numeroOperando1", calculadoraService.getOperando1()); //lo parseo para poder añadirlo a la vista
         model.addAttribute("numeroOperando2", calculadoraService.getOperando2()); //y parseo el operando 2 para manejarlo en la vista 
-        //necesito ambos para no perder el primer número en caso de que si se haya pulsado el botón +
 
        return "redirect:/";
     }
