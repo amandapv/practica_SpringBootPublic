@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formuario</title>
+  </head>
+
+  <body>
+    <form action="#" method="post" th:action="@{/form/submit}" th:object="${form}">
+      <label for="fecha1">Fecha 1:</label>
+      <input type="date" id="fecha1" th:field="*{fecha1}">
+      <br><br>
+      <label for="fecha2">Fecha 2:</label>
+      <input type="date" id="fecha2" th:field="*{fecha2}">
+      <br><br>
+      <div>
+        <div style="border: 1px solid black; width: 40%; padding: 3px;">
+          <h3>Calcular cuántos días hay entre ambas fechas:</h3>
+          <button onclick="calcularDias()">Calcular</button>
+        </div>
+        <br>
+        <div style="border: 1px solid black; width: 40%; padding: 3px;">
+          <h3>List de los años bisiestos comprendidos entre las fechas introducidas (ambas incluídas):</h3>
+          <button onclick="calcularBisiestos()">Calcular</button>
+        </div>
+        <br>
+        <div style="border: 1px solid black; width: 40%; padding: 3px;">
+          <h3>Calcular cuántos días hay entre ambas fechas:</h3>
+          <button onclick="calcularDomingo1()">Calcular</button>
+        </div>
+        <br><br>
+      </div>
+      <br><br>
+      <input type="submit" value="Enviar formulario">
+    </form>
+    
+  </body>
+
+  <!-- Los scripts de JS mejor fuera del body, ya que la ejecución es lineal entonces si se ejecuta antes el JS petaría sin saber por qué -->
+  <script>
+      function calcularDias() {
+        var cateto1 = document.querySelector("#fecha1").value;
+        var cateto2 = document.querySelector("#fecha2").value;
+        window.location.href = "/formSubmitView/";
+      }
+    </script>
+    <script>
+      function calcularBisiestos() {
+        var cateto1 = document.querySelector("#fecha1").value;
+        var cateto2 = document.querySelector("#fecha2").value;
+        window.location.href = "/formSubmitView/";
+      }
+    </script>
+    <script>
+      function calcularDomingo1() {
+        var cateto1 = document.querySelector("#fecha1").value;
+        var cateto2 = document.querySelector("#fecha2").value;
+        window.location.href = "/formSubmitView/";
+      }
+    </script>
+</html>
