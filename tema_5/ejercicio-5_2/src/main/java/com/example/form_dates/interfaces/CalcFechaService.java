@@ -12,4 +12,6 @@ public interface CalcFechaService {
     List<Year> calcularBisiestos(Formulario form);
 
     List<Integer> calcularAnios11Domingo(Formulario form);
+
+    void verificarFechas(Formulario form);
 }

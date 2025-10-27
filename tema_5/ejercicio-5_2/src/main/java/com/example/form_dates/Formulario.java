@@ -4,11 +4,17 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Formulario {
+    @NotNull(message = "Introduzca la fecha")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate fecha1;
+
+    @NotNull(message = "Introduzca la fecha")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate fecha2;
+    // private String valueButton;
 
     //getters
     public LocalDate getFecha1() {
@@ -17,7 +23,7 @@ public class Formulario {
     public LocalDate getFecha2() {
         return fecha2;
     }
-
+    
     //setters
     public void setFecha1(LocalDate fecha1) {
         this.fecha1 = fecha1;

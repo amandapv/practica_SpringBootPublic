@@ -15,6 +15,14 @@ import com.example.form_dates.interfaces.CalcFechaService;
 @Service // anotación servicio
 public class CalcFechaServiceImpl implements CalcFechaService{
 
+    //método para verificar que la fecha 1 es anterior a la fecha 2...
+    public void verificarFechas(Formulario form) throws RuntimeException {
+        if (form.getFecha1().isAfter(form.getFecha2())) { //si la fecha1 es posterior a la fecha2...
+            throw new RuntimeException("La primera fecha ha de ser anterior a la segunda fecha.");
+        }
+    }
+
+
     //método para calcular cuántos días hay entre ambas fechas
     public long calcularDias(Formulario form) {
         // ChronoUnit.DAYS.between() devuelve la diferencia en días como un valor long
