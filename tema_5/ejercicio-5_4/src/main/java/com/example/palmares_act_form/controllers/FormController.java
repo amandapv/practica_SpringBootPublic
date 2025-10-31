@@ -38,7 +38,7 @@ public class FormController {
             txtError = null; // vacía la variable para usarla de nuevo
         }
 
-        model.addAttribute("form", new Formulario());
+        model.addAttribute("form", new Formulario()); 
 
         return "formView";
     }
@@ -56,27 +56,27 @@ public class FormController {
             model.addAttribute("nombre", formServiceImpl.nombreMayus(form));
             
             String nuevoArchivo = fileStorageService.store(file, form.getDni()); //devuelve el nombre definitivo con el que se ha guardado. Lo podríamos guardar en algún objeto
-            System.out.println(nuevoArchivo);
+            String rutaCompletaArchivo = fileStorageService.getAbsolutePath(nuevoArchivo); //obtener la ruta del archivo que vamos a adjuntar para el envío del correo al usuario
+            
+            System.out.println("Archivo: " + nuevoArchivo);
+            System.out.println("Ruta completa: " + rutaCompletaArchivo);
 
             form.setArchivo(nuevoArchivo); //modifico el nombre del archivo
             
             String destinatario = form.getEmail();
-            System.out.println(destinatario);
             String asunto = "Formulario de contacto para el socio " + form.getNombre();
-            String cuerpoMensaje = "Ha solicitado la compra del producto:" + form.getProducto() + " el socio " + form.getNombre() + " con DNI: " + form.getDni() + ". Le adjuntamoms el archivo con su carnet de socio.";
+            String cuerpoMensaje = "Ha solicitado la compra del producto:" + form.getProducto() + " el socio " + form.getNombre() + " con DNI: " + form.getDni() + ". Le adjuntamos el archivo con su carnet de socio.";
 
-            emailService.sendEmail(destinatario, asunto, cuerpoMensaje, nuevoArchivo); //enviar el email - si no lo consigue se lanzará un MessagingException
-
-            model.addAttribute("formEnviado", "Formulario procesado correctamente");
+            emailService.sendEmail(destinatario, asunto, cuerpoMensaje, rutaCompletaArchivo); //enviar el email - si no lo consigue se lanzará un MessagingException
+            
 
         } catch (Exception e) {
             txtError = e.getMessage();
-            System.out.println(txtError);
             return "redirect:/contacta";
         }
         
-        return "redirect:/contacta";
+        model.addAttribute("formEnviado", "Formulario procesado correctamente");
+        return "formView"; //retorno a la vista del formulario para que así en caso de que se envíe el formulario correctamente, no pierda los datos y los muestre en caso de que se envíe correctamente (lo hago porque la captura del ejercicio se muestra así)
     }
-    
     
 }

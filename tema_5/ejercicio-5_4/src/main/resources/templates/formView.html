@@ -50,9 +50,10 @@
         <input type="submit" value="Enviar">
     </form>
 
-    <!-- <div th:if="${formEnviado}"> -->
-        <p class="alert alert-danger" role="alert" th:text="${formEnviado}"></p>
-    <!-- </div> -->
+    <!-- si el formulario ha sido envíado correctamente, mostrará un alert (success) de que se ha envíado -->
+    <div th:if="${formEnviado}">
+        <p class="alert alert-success" role="alert" th:text="${formEnviado}"></p>
+    </div>
 
     <!-- para mostrar los posibles errores... Exception-->
     <div th:if="${txtErr != null}">

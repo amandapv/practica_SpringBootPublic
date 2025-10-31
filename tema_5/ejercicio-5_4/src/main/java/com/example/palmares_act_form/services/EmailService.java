@@ -18,7 +18,7 @@ public class EmailService {
     public boolean sendEmail(String destination, String subject, String textMessage, String adjunto) {
         try {
             MimeMessage message = sender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true); //se añade true para indicarle que el correo será "Multipart", ya qu eno es un correo simple (texto plano), sino que adjuntaremos archivos (multipart - contenido complejo)
             helper.setTo(destination);
             helper.setText(textMessage, true);
             helper.setSubject(subject);

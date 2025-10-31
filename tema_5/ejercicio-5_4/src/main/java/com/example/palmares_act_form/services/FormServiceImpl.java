@@ -9,6 +9,7 @@ public class FormServiceImpl {
 
     //método para convertir a mayúculas el nombre
     public String nombreMayus(Formulario form) {
+        form.setNombre(form.getNombre().toUpperCase()); //modifico el nombre del cliente a mayúsculas
         return form.getNombre().toUpperCase(); //retorno el nombre de la persona en mayúculas
     }
 
