@@ -1,4 +1,4 @@
-package com.example.palmares_act_form;
+package com.example.palmares_act_form.controllers;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

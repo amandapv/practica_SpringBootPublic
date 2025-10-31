@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragmentos.html::cabecera}"></head>
+<body>
+    <nav th:replace="~{/fragmentos.html::menu}"></nav>
+    <form enctype="multipart/form-data" action="#" method="post" th:action="@{/contacta/submit}" th:object="${form}">
+
+        <h3>Contacto</h3>
+        
+        <label>Nombre: 
+            <input type="text" name="nombre" th:field="*{nombre}"> 
+            <span th:classappend="${#fields.hasErrors('nombre')} ? 'cssError'" th:errors="*{nombre}"></span>
+        </label> <br>
+        
+        <label>DNI: 
+            <input type="text" name="dni" th:field="*{dni}">
+            <span th:classappend="${#fields.hasErrors('dni')} ? 'cssError'" th:errors="*{dni}"></span>
+        </label> <br>
+
+        <label>Email:
+            <input type="email" name="email" th:field="*{email}">
+            <span th:classappend="${#fields.hasErrors('email')} ? 'cssError'" th:errors="*{email}"></span>
+        </label> <br>
+
+        <label>Dirección de envío:
+            <input type="text" name="direccion" th:field="*{direccionEnvio}">
+            <span th:classappend="${#fields.hasErrors('direccionEnvio')} ? 'cssError'" th:errors="*{direccionEnvio}"></span>
+        </label> <br>
+
+        <label for="productos">Tipo de producto:</label> <br>
+        <select name="productos" id="productos" th:field="*{producto}">
+            <option value="">Seleccione una opción</option>
+            <option value="FOTO_FIRMADA">FOTO_FIRMADA</option>
+            <option value="ENTRADA_VIP">ENTRADA_VIP</option>
+            <option value="BUFANDA">BUFANDA</option>
+        </select>
+        <span th:classappend="${#fields.hasErrors('producto')} ? 'cssError'" th:errors="*{producto}"></span> <br><br>
+
+        
+        <p>Acepta condiciones:
+            <input type="checkbox" name="condiciones" th:field="*{aceptCondiones}">
+            <span th:classappend="${#fields.hasErrors('aceptCondiones')} ? 'cssError'" th:errors="*{aceptCondiones}"></span>
+        </p>
+
+        <p>Adjuntar DNI socio:
+            <input type="file" name="file" required>
+            <!-- <span th:classappend="${#fields.hasErrors('archivo')} ? 'cssError'" th:errors="*{archivo}"></span> -->
+        </p>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    <!-- <div th:if="${formEnviado}"> -->
+        <p class="alert alert-danger" role="alert" th:text="${formEnviado}"></p>
+    <!-- </div> -->
+
+    <!-- para mostrar los posibles errores... Exception-->
+    <div th:if="${txtErr != null}">
+        <p class="alert alert-danger" role="alert" th:text="${txtErr}">error</p>
+    </div>
+</body>
+</html>
