@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -44,9 +44,19 @@
         </tr>
 
         <tr>
-          <td th:each="voto, iStat : ${listadoVoto}">
-            <label>Voto:<input type="radio" name="votos" th:value="${iStat.index}" th:field="*{foto}"></label>
+          <td th:each="voto, iterador : ${listadoVoto}">
+            <label>Voto:<input type="radio" name="votos" th:value="${iterador.index}" th:field="*{foto}"></label> <!-- uso iterador.index ya que index comienza en 0 y es lo que necesito para rellenar el atributo value del radio -->
           </td>
+          <!-- otra opción sería no hacer un each y decirle directamente el valor del button que sea 0, 1 y 2, ya que mi arraylist tiene 3 posiciones: -->
+          <!-- <td>
+            <div>Voto: <input type="radio" value="0" name="voto" th:field="*{foto}"></input></div>
+          </td>
+          <td>
+            <div>Voto: <input type="radio" value="1" name="voto" th:field="*{foto}"></input></div>
+          </td>
+          <td>
+            <div>Voto: <input type="radio" value="2" name="voto" th:field="*{foto}"></input></div>
+          </td> -->
         </tr>
 
         <tr>

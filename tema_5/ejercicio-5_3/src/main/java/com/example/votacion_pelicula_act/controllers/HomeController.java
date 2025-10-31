@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.votacion_pelicula_act.Formulario;
-import com.example.votacion_pelicula_act.services.VotacionServiceImpl;
+import com.example.votacion_pelicula_act.interfaces.VotacionService;
 
 import jakarta.validation.Valid;
 
@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 public class HomeController {
     
     @Autowired
-    private VotacionServiceImpl votacionService;
+    private VotacionService votacionService;
     private Formulario form = new Formulario(); //la inicializo de forma global para que en el getMapping no tenga que crearlo ahí y no se resetee
     private String txtError;
 
@@ -54,9 +54,10 @@ public class HomeController {
 
         try {
             votacionService.votacion(form); //llamo al método de la votación del servicio
-            model.addAttribute("form", form);
-            model.addAttribute("listadoVoto", votacionService.getListadoVoto()); //le paso a la vista el listado de votos
-            model.addAttribute("listadoEmail", votacionService.getListadoEmail()); //le paso a la vista el listado de emails
+            //NO SIRVE DE NADA QUE AÑADA AL MODELO ESTA INFORMACIÓN PORQUE COMO REDIRIJO A / LA VARIABLE MODEL SE RESETEA YA QUE ES LOCAL AL MÉTODO VOTACION ---------------------------------------------
+            // model.addAttribute("form", form);
+            // model.addAttribute("listadoVoto", votacionService.getListadoVoto()); //le paso a la vista el listado de votos
+            // model.addAttribute("listadoEmail", votacionService.getListadoEmail()); //le paso a la vista el listado de emails
 
             System.out.println(votacionService.getListadoVoto());  
         }
