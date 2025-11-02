@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado Paises</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <form action="#" method="post" th:action="@{/submit}" th:object="${formPais}">
+        <h3>Info de paises - Versión CommandLineRunner y JavaScript</h3>
+
+        <select name="listaPaises" onchange="this.form.submit()" th:field="*{nomPais}">
+            <option th:each="listPaises:${listadoPaises}" th:value="${listPaises.nomPais}" th:text="${listPaises.nomPais}"></option>
+        </select>
+
+        <!-- para mostrar los posibles errores... -->
+        <div th:if="${txtError!=null}">
+            <p class="alert alert-danger" role="alert" th:text="${txtError}">error</p>
+        </div>
+
+    </form>
+
+    <div th:if="${capEncontrada != null && poblEncontrada != null && capEncontrada != '' }">
+        <p>Capital: <span th:text="${capEncontrada}"></span> </p>
+        <p>Población: <span th:text="${poblEncontrada}"></span> </p>
+    </div>
+</body>
+<script>
+    document.getElementsByTagName("select")[0].children[0].disabled = true
+</script>
+</html>
