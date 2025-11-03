@@ -59,15 +59,14 @@ public class MasterMindService {
     }
     
 
-    public void comprobarIntento(String intento) {
+    public String comprobarIntento(String intento) {
         
         if (masterMind.getEstadoJuego() != EstadoJuego.JUGANDO) {
-            // System.out.println("patata 1");
-            return;
+            return "El juego ha finalizado"; //retornar esta string en caso de que el juego haya acabado 
         }
         if (cadenaConDuplicados(intento) || intento.length() != masterMind.TAM_NUMERO) {
             // System.out.println("patata 2");
-            return;
+            return "El número no coincide"; //retornar esta string en caso de que el número no coincida con el tamano del juegeo
         }
         // System.out.println(intento);
         int bienColocados = 0, malColocados = 0;
@@ -87,10 +86,15 @@ public class MasterMindService {
 
         // System.out.println("Número de intentos: " + masterMind.MAX_INTENTOS);
         System.out.println("Tamaño intentos: " + masterMind.getListaIntentos().size());
-        if (bienColocados == masterMind.TAM_NUMERO)
+        if (bienColocados == masterMind.TAM_NUMERO){
             masterMind.setEstadoJuego(EstadoJuego.GANO);
-        if (masterMind.getListaIntentos().size() >= masterMind.MAX_INTENTOS)
+            return "Has ganado"; //retornar esta string en caso de que el usuario haya ganado el juego
+        } 
+        if (masterMind.getListaIntentos().size() >= masterMind.MAX_INTENTOS) {
             masterMind.setEstadoJuego(EstadoJuego.PERDIO);
+            return "Has perdido"; //retornar esta string en caso de que el usuario haya perdido el juego
+        }
+        return null; //no retorna nada por defecto, es decir que si no hay errores no retorna nada
     }
 
 

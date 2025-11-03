@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
     <title>MasterMind</title>
   </head>
   <body>
@@ -11,16 +13,13 @@
     Estado de juego:
     <span th:text="${estadoJuego}">estado</span>
     <br/><br/>
-    Nuevo intento: 
+    Nuevo intento:
         <form method="post" action="#" th:action="@{/juego}" th:object="${formInfo}">
           <input type="text" id="intento" th:field="*{intento}">
           <input type="submit" value="Enviar"/>
         </form>
 
-    <p>Intentos restantes: <span th:text="${numIntRestantes}"></span> </p>
-    <!-- <div th:each="listaInt:${numIntRestantes}">
-      <p th:text="${listaInt}"></p>
-    </div> -->
+    <p>Intentos restantes: <span th:text="${masterMind.MAX_INTENTOS - #lists.size(listaIntentos)}"></span> </p>
 
     Lista de intentos:
         <table border="1">
@@ -31,6 +30,12 @@
             <td th:text="${intento.malColocados}">malColocados</td>
           </tr>
         </table>
+
+        <br>
+        <!-- mostrar las gestiones de posibles errores del juego / notificar de cómo va -->
+        <div th:if="${txtErroresIntentos != null}">
+          <p class="alert alert-info" role="alert" th:text="${txtErroresIntentos}">error</p>
+        </div>
         
         <br/>
         <a th:href="@{/}">Inicio</a><br/>

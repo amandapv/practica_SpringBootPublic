@@ -17,7 +17,9 @@ public class MasterMindController {
     @Autowired
     public MasterMindService masterMindService;
 
-    private String txtError = "";
+    private String txtError;
+    private String txtErroresIntentos;
+
 
     @GetMapping("/")
     public String showHome(Model model) {
@@ -28,9 +30,21 @@ public class MasterMindController {
         return "indexView";
     }
 
+
     @GetMapping("/juego")
     public String showGame(Model model) {
+
+        if (masterMindService.masterMind == null) { //si no empezó el juego...
+            return "redirect:/"; //redirigir a /
+        }
+
+        if (txtErroresIntentos != null) { //si el método no retorna null, es decir, ha retornado algún error
+            model.addAttribute("txtErroresIntentos", txtErroresIntentos);
+            txtErroresIntentos = null;
+        }
+
         model.addAttribute("formInfo", new FormInfo());
+        model.addAttribute("masterMind", masterMindService.masterMind);
         model.addAttribute("listaIntentos", masterMindService.masterMind.getListaIntentos());
         model.addAttribute("estadoJuego", masterMindService.masterMind.getEstadoJuego());
 
@@ -39,12 +53,13 @@ public class MasterMindController {
         return "juegoView";
     }
 
+
     @PostMapping("/juego")
     public String newTry(FormInfo formInfo) {
-        masterMindService.comprobarIntento(formInfo.getIntento());
+        txtErroresIntentos = masterMindService.comprobarIntento(formInfo.getIntento()); //llamo al método comprobarIntento() y veo si hay errores en ese método para almacenarlo en la variable txtErroresIntentos
         return "redirect:/juego";
-
     }
+
 
     @GetMapping("/nuevoJuego")
     public String newGame(@RequestParam(required = false) String numInt, @RequestParam(required = false) String tamanoNum, Model model) {
