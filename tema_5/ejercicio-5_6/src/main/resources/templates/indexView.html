@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MasterMind</title>
+  </head>
+  <body>
+    <h1>Juego del MasterMind</h1>
+    <p>Debe adivinar un número de 4 cifras distintas. 
+      En cada intento, le informamos de cuantas cifras ha acertado y si esas cifras están en la posición correcta.</p>
+      <p>Ejemplo: Si el número secreto es 1234 y su intento es 1240 indicaremos: 2 bien colocados, 1 mal colocado.
+      Tiene un número de aciertos limitado </p>
+      <br/>
+
+      <div>
+        <label for="intentos"> <input type="number" id="intentos"> </label>
+
+        <!-- solo hago un desplegable que me muestre los números del 2 al 10, por hacerlo más factible -->
+        <select name="digAdiv" id="digAdiv"> 
+          <option th:each="numero:${#numbers.sequence(2, 10)}" th:text="${numero}" th:value="${numero}"></option>
+        </select>
+
+        <!-- hacer una función de javascript para poder recoger el dato por query... en este caso, el número de intentos -->
+        <script>
+          function intentosJuego() {
+            var numInt = document.querySelector("#intentos").value;
+            var numDigAdivinar = document.querySelector("#digAdiv").value;
+
+            // console.log(numInt);
+            window.location.href = "/nuevoJuego?numInt=" + numInt + "&tamanoNum=" + numDigAdivinar;
+          }
+        </script>
+      </div>
+
+      <!-- cambiar el enlace al juego por un botón que utiliza la función de javascript definida anteriormente -->
+      <button onclick="intentosJuego()"> Jugar </button>
+
+      <!-- <br><br>
+
+      <div>
+        <label for="digAdiv"> <input type="number" id="intentos"> </label>
+
+        <select name="digAdiv">
+          <option th:each="numero:${#numbers.sequence(2, 10)}" th:text="${numero}" th:value="numbers"></option>
+        </select> -->
+
+        <!-- hacer una función de javascript para poder recoger el dato por query... en este caso, el número de intentos -->
+        <!-- <script>
+          function intentosJuego() {
+            var numInt = document.querySelector("#intentos").value;
+            // console.log(numInt);
+            window.location.href = "/nuevoJuego?numInt=" + numInt;
+          }
+        </script>
+      </div> -->
+
+      <!-- cambiar el enlace al juego por un botón que utiliza la función de javascript definida anteriormente -->
+      <!-- <button onclick="intentosJuego()"> Jugar </button> -->
+
+      <!-- si hay errores... mostrarlos -->
+      <div th:if="txtError != null">
+        <p class="alert alert-danger" role="alert" th:text="${txtError}">error</p>
+      </div>
+    
+  </body>
+</html>
