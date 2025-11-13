@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empleado CRUD</title>
+    <style>.cssError{ background-color:red; }</style>
+  </head>
+  <body>
+    <h1>Editar empleado</h1>
+    <form method="post" action="#" 
+            th:action="@{/editar/{id}/submit(id=${cursoForm.id})}" 
+            th:object="${cursoForm}">
+            <input type="hidden" id="id" th:field="*{id}" /> </label>
+            <label>Nombre:<input type="text" id="nombre" th:field="*{nombre}" /></label><br/>
+            <label>Email:<input type="text" id="email" th:field="*{email}"/></label><br/>
+            <label>Salario:<input type="text" id="salario" th:field="*{salario}" /></label><br/>
+            <label>En Activo:<input type="checkbox" id="enActivo"  th:field="*{enActivo}" ></label><br/>
+            Genero:<br/>          
+            <div th:each="gen : ${T(com.example.myapp.domain.Genero).values()}">
+                <input type="radio" name="button1" th:value="${gen}" th:text="${gen}" th:field="*{genero}" />
+            </div>
+            <input  type="submit" value="Enviar" />    
+            <a  th:href="@{/}">Inicio</a>
+    </form>
+  </body>
+</html>

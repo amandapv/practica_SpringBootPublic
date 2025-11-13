@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empleado CRUD</title>
+  </head>
+  <body>
+        <h1>Datos de empleado</h1>
+        <table>
+          <tbody>
+            <tr><td>Id</td>	<td th:text="${empleado.id}">Id</td></tr>
+            <tr><td>Nombre</td><td th:text="${empleado.nombre}">nombre</td></tr>
+            <tr><td>email</td><td th:text="${empleado.email}">email@mail.com</td></tr>
+            <tr><td>Salario</td> <td th:text="${empleado.salario}">0</td></tr>
+            <tr><td>En Activo</td><td th:text="${empleado.enActivo}">bool</td></tr>
+            <tr><td>Genero</td><td th:text="${empleado.genero}">genero</td></tr>
+            <tr><td><a th:href="@{/editar/{id}(id=${empleado.id})}">Editar</a></td>
+                <td><a th:href="@{/borrar/{id}(id=${empleado.id})}">Borrar</a>
+                    <a  th:href="@{/}">Inicio</a></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+  </body>
+</html>
