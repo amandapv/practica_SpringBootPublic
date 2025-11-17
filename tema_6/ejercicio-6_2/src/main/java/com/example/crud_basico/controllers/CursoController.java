@@ -89,7 +89,7 @@ public class CursoController {
             //return "redirect:/";
         //}
         try {
-            cursoService.editar();
+            cursoService.editar(cursoForm);
             txtAciertos = "Operación realizada con éxito";
         } catch (RuntimeException e) {
             txtMsg = e.getMessage();
