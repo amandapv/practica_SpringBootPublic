@@ -18,7 +18,8 @@
               <tr th:each="curso : ${listaCursos}">
                 <td th:text="${curso.id}">Id</td>
                 <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
-                <td th:text="${curso.precio}"> </td>        		
+                <td th:text="${curso.precio}">precio</td>        		
+                <td th:text="${curso.tematica}">tematica</td>
                 <td><a  th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
                 <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
               </tr>

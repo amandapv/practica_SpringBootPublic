@@ -73,8 +73,7 @@ public class CursoController {
     }
 
     @PostMapping("/editar/{id}/submit")
-    public String showEditSubmit(@PathVariable Long id, @Valid Curso cursoForm,
-            BindingResult bindingResult) {
+    public String showEditSubmit(@PathVariable Long id, @Valid Curso cursoForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             txtMsg = "Error en formulario";
