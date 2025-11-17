@@ -13,7 +13,7 @@
             <label>Nombre:<input type="text" id="nombre" th:field="*{nombre}" /></label><br/>
             
             <label>Precio:<input type="text" id="precio" th:field="*{precio}" /></label><br/>
-            Tematica:<br/>          
+            Temática:<br/>          
             <div th:each="tem : ${T(com.example.crud_basico.domain.Tematica).values()}">
                 <input type="radio" name="button1" th:value="${tem}" th:text="${tem}" th:field="*{tematica}" />
             </div>

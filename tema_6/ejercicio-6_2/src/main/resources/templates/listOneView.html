@@ -13,7 +13,7 @@
             <tr><td>Id</td>	<td th:text="${curso.id}">Id</td></tr>
             <tr><td>Nombre</td><td th:text="${curso.nombre}">nombre</td></tr>
             <tr><td>Precio</td> <td th:text="${curso.precio}">0</td></tr>
-            <tr><td>Temática</td><td th:text="${curso.tematica}">tematica</td></tr>
+            <tr><td>Temario</td><td th:text="${curso.tematica}">Tematica</td></tr>
             <tr><td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>
                 <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a>
                     <a  th:href="@{/}">Inicio</a></td></tr>
