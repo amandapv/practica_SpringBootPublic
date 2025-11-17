@@ -15,7 +15,7 @@ public class CursoServiceImpl implements CursoService {
         return repositorio;
     }
 
-    public Curso obtenerPorId(long id) throws RuntimeException{
+    public Curso obtenerPorId(long id) throws RuntimeException {
         for (Curso curso : repositorio)
             if (curso.getId() == id)
                 return curso;
@@ -23,7 +23,7 @@ public class CursoServiceImpl implements CursoService {
         //return null; // podría lanzar excepción si no encontrado
     }
 
-    public Curso añadir(Curso curso) {
+    public Curso añadir(Curso curso) throws RuntimeException {
         if (repositorio.contains(curso))
             //return null;
             throw new RuntimeException ("No se puede añadir el curso");
@@ -33,9 +33,8 @@ public class CursoServiceImpl implements CursoService {
 
     }
 
-    public Curso editar(Curso curso) {
+    public Curso editar(Curso curso) throws RuntimeException {
         int pos = repositorio.indexOf(curso);
-        // if (pos == -1) throw new RuntimeException ("curso no encontrado");
         if (pos == -1)
             //return null;
             throw new RuntimeException ("Curso no encontrado");
@@ -43,7 +42,7 @@ public class CursoServiceImpl implements CursoService {
         return curso;
     }
 
-    public void borrar(Long id) {
+    public void borrar(Long id) throws RuntimeException {
         Curso curso = this.obtenerPorId(id);
         if (curso != null) {
             repositorio.remove(curso); 

@@ -9,27 +9,30 @@
     <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-          <h1>Listado de empleados</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th><th>Nombre</th><th>Precio</th><th>Temática</th>
-                <th>Editar</th><th>Borrar</th></tr>
-            </thead>
-            <tbody>
-              <tr th:each="curso : ${listaCursos}">
-                <td th:text="${curso.id}">Id</td>
-                <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
-                <td th:text="${curso.precio}">precio</td>
-                <td th:text="${curso.tematica}">tematica</td>
-                <td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
-                <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
-              </tr>
-            </tbody>
-          </table>
-          <p th:if="${msg!=null}">
-            <span th:text="${msg}">err</span>
-          </p>
-        <a th:href="@{/nuevo}">Nuevo curso</a><br/>
+    <h1>Listado de empleados</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Nombre</th><th>Precio</th><th>Temática</th>
+          <th>Editar</th><th>Borrar</th></tr>
+      </thead>
+      <tbody>
+        <tr th:each="curso : ${listaCursos}">
+          <td th:text="${curso.id}">Id</td>
+          <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
+          <td th:text="${curso.precio}">precio</td>
+          <td th:text="${curso.tematica}">tematica</td>
+          <td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
+          <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
+        </tr>
+      </tbody>
+    </table>
+    <div th:if="${msg!=null}">
+      <p class="alert alert-danger" role="alert" th:text="${msg}">err</p>
+    </div>
+    <div th:if="${aciertos!=null}">
+      <p class="alert alert-success" role="alert" th:text="${aciertos}">aciertos</p>
+    </div>
+    <a th:href="@{/nuevo}">Nuevo curso</a><br/>
   </body>
 </html>

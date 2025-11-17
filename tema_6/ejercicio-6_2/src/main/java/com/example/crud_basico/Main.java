@@ -19,8 +19,8 @@ public class Main {
 	@Bean
 	CommandLineRunner initData(CursoService cursoService) {
 		return args -> {
-			cursoService.añadir(new Curso(1L, "Backend", 25000d, Tematica.SISTEMAS));
-			cursoService.añadir(new Curso(2L, "Frontend", 20000d, Tematica.PROGRAMACION));
+			cursoService.añadir(new Curso(1L, "Backend", 2500d, Tematica.SISTEMAS));
+			cursoService.añadir(new Curso(2L, "Frontend", 2000d, Tematica.PROGRAMACION));
 		};
 	}
 
