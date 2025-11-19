@@ -9,7 +9,15 @@
     <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <h1>Listado de empleados</h1>
+    <h1>Listado de cursos</h1>
+
+    <form action="#" method="post" th:action="@{/filtroPorCurso}" th:object="${curso}">
+      <label>Buscar por nombre: 
+        <input type="text" name="nombre" th:field="*{nombre}">
+      </label>
+      <input type="submit" value="Buscar">
+    </form>
+
     <table>
       <thead>
         <tr>

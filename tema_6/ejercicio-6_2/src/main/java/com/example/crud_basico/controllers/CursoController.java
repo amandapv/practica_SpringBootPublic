@@ -26,6 +26,7 @@ public class CursoController {
 
     @GetMapping({ "/", "/list" })
     public String showList(Model model) {
+        model.addAttribute("curso", new Curso());
         model.addAttribute("listaCursos", cursoService.obtenerTodos());
         if (txtMsg != null) {
             model.addAttribute("msg", txtMsg);
