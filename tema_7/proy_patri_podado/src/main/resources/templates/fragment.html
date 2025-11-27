@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+
+<!-- Definimos dentro de esta plantilla dos fragmentos: cabecera y menu-->
+<html lang="es" xmlns:th="https://www.thymeleaf.org"> 
+  <head>
+    <th:block th:fragment="cabecera"> 
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <title>Gestión de empleados</title> 	
+    </th:block>
+  </head>
+<body> 
+    <nav th:fragment="menu" class="navbar navbar-dark bg-dark navbar-expand-sm">
+      <ul class="navbar-nav">
+        <li><a class="nav-link active" th:href="@{/}">Empleados</a></li>
+        <li><a class="nav-link active" th:href="@{/depto/}">Departamentos</a></li>
+    </ul>     
+      </nav>
+    </body> 
+</html>
+

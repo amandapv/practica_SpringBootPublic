@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:insert="~{fragment.html :: cabecera}"></th:block> 
+    <title>Nuevo empleado</title>
+    <style>.cssError{ background-color:red; }</style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <nav th:replace="~{fragment.html::menu}"></nav>
+    <h1>Nuevo empleado</h1>
+    <form method="post" action="#" th:action="@{/nuevo/submit}"
+            th:object="${empleadoForm}">
+            <input type="hidden" id="id" th:field="*{id}" />
+            <label>Nombre:<input type="text" id="nombre" th:field="*{nombre}" /></label><br/>
+            
+            <div th:classappend="${#fields.hasErrors('email')} ? 'cssError'">
+               <label>Email:<input type="text" id="email" th:field="*{email}"/>
+               <span th:if="${#fields.hasErrors('email')}" 
+                     th:errors="*{email}" class=".cssError">texto error</span>  
+               </label>
+            </div> 
+            <br/>
+            <label>Salario:<input type="text" id="salario" th:field="*{salario}" /></label><br/>
+            <label>En Activo:<input type="checkbox" id="enActivo"  th:field="*{enActivo}" ></label><br/>
+            Genero:<br/>          
+            <div th:each="gen : ${T(com.example.myapp.domain.Genero).values()}">
+                <input type="radio" name="button1" th:value="${gen}" th:text="${gen}" th:field="*{genero}" />
+            </div>
+            Departamento:<br/>     
+            <select name="list1" th:field="*{departamento}"> 
+              <option th:each="departamento:${listaDepartamentos}" 
+                      th:value="${departamento.id}" th:text="${departamento.nombre}">
+              </option>
+              </select>
+            <br/>
+            <input class="btn btn-primary" type="submit" value="Enviar" />
+    </form>
+    <br/>
+    </div>
+    <a class="btn btn-info" th:href="@{/}">Inicio</a><br/>
+    </div>
+  </body>
+</html>
