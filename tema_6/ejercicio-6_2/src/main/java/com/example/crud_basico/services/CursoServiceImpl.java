@@ -26,7 +26,7 @@ public class CursoServiceImpl implements CursoService {
     public Curso añadir(Curso curso) throws RuntimeException {
         if (repositorio.contains(curso))
             //return null;
-            throw new RuntimeException ("No se puede añadir el curso");
+            throw new RuntimeException ("No se puede añadir el curso, ya existe");
         // ver equals curso (mismo id)
         repositorio.add(curso);
         return curso; // podría no devolver nada, o boolean, etc
