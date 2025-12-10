@@ -50,4 +50,15 @@ public class CursoServiceImpl implements CursoService {
             throw new RuntimeException ("Curso no encontrado");
         }
     }
+
+    public List<Curso> buscarPorNombre(String txtNomCursos) {
+        txtNomCursos = txtNomCursos.toLowerCase();
+        List<Curso> encontrados = new ArrayList<>();
+        for (Curso curso : repositorio) {
+            if (curso.getNombre().toLowerCase().contains(txtNomCursos)) {
+                encontrados.add(curso);
+            }
+        }
+        return encontrados;
+    }
 }
