@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:insert="~{fragment.html :: cabecera}"></th:block> 
+    <title>Departamento CRUD</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="container">
+          <div class="row justify-content-center">
+            <nav th:replace="~{fragment.html::menu}"></nav>
+        <h1>Listado de Departamentos</h1>
+        <table class="table table-striped">
+        	<thead><tr>
+        		<th>ID</th><th>Nombre<th>Editar</th><th>Borrar</th></tr>
+        	</thead>
+        	<tbody>
+        		<tr th:each="departamento : ${listaDepartamentos}">
+        			<td th:text="${departamento.id}">Id</td>
+        			<td th:text="${departamento.nombre}">nombre</td>
+              <td><a class="btn btn-info" th:href="@{/depto/edit/{id}(id=${departamento.id})}">Editar</a></td>        		
+              <td><a class="btn btn-danger" th:href="@{/depto/delete/{id}(id=${departamento.id})}">Borrar</a></td>        		
+        		</tr>
+        	</tbody>
+        </table>
+        <p class="alert alert-info" th:if="${msg!=null}">
+          <span th:text="${msg}">err</span>
+        </p>
+      </div>
+      <a class="btn btn-primary" href="/depto/new">Nuevo Departamento</a><br/>
+    </div>
+  </body>
+</html>

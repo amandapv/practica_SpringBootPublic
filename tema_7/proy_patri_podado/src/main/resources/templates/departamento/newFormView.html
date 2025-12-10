@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:insert="~{fragment.html :: cabecera}"></th:block> 
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <nav th:replace="~{fragment.html::menu}"></nav>
+    <h1>Nuevo Departamento</h1>
+    <form method="post" action="#" th:action="@{/depto/new/submit}"
+            th:object="${departamentoForm}">
+			<label>Id: ---solo lectura---<input type="text" readonly id="id" th:field="*{id}" /> </label><br/>
+            <label>Nombre:<input type="text" id="nombre" th:field="*{nombre}" /></label><br/>
+            Presupuesto:<input type="text" id="presupuesto" th:field="*{presupuesto}" /> </label><br/>
+            <input type="submit" value="Enviar" />
+    </form>
+      </div>
+    </div>
+  </body>
+</html>

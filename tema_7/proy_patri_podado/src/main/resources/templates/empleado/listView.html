@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:insert="~{fragment.html :: cabecera}"></th:block> 
+    <title>Lista de empleados</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <nav th:replace="~{fragment.html::menu}"></nav>
+          <h1>Listado de empleados</h1>
+          <form method="post" action="#" th:action="@{/findByName}"
+              th:object="${findForm}">
+              <label>Buscar por nombre:<input type="text" name="nombre" th:field="*{nombre}" /></label>
+              <input class="btn btn-primary" type="submit" value="Buscar"/>
+          </form><br/>
+          <div class="col-sd-4">
+            Filtro por género:
+           <select id="selectGenero" onChange="changeGenero();">
+            <option value="">Todos</option>  
+            <!--
+            Recorremos los valores del enum Genero y añadimos un option por cada uno.
+            Muestra en el desplegable el valor por defecto (el género de los empleados que se están mostrando)
+            -->           
+            <option th:each="gen : ${T(com.example.myapp.domain.Genero).values()}"  
+                th:value="${gen}" th:text="${gen}"
+                th:selected="${gen} == ${generoSeleccionado} ? true : false"></option>
+         </select>
+          </div>
+          <div class="col-sd-4">
+          Departamento:
+          <!--Añadimos un select para filtrar por departamento-->
+          <select id="selectDepto" onChange="changeDepartamento();">
+              <option value="0">Todos</option>
+              <!-- Recorremos la lista de departamentos y añadimos un option por cada uno. Muestra en el desplegable el valor por defecto 
+              (el nombre del departamento cuyos empleados se están mostrando)-->
+              <option th:each="dep : ${listaDepartamentos}" 
+                  th:value="${dep.id}" th:text="${dep.nombre}"
+                  th:selected="${dep.id} == ${deptoSeleccionado} ? true : false">
+              </option>
+          </select>
+          </div>
+          <!-- Añadimos un enlace a la página principal -->
+           <a th:href="@{/}">Reestablecer</a>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th><th>Nombre</th><th>Email</th><th>Salario</th>
+                <th>Activo</th><th>Género</th><th>Depto</th><th>Editar</th><th>Borrar</th>
+            </thead>
+            <tbody>
+              <tr th:each="empleado : ${listaEmpleados}">
+                <td th:text="${empleado.id}">Id</td>
+                <td><a th:href="@{/{id}(id=${empleado.id})}" th:text="${empleado.nombre}">nombre</a></td>
+                <td th:text="${empleado.email}">email@gmail.com</td>
+                <td th:text="${empleado.salario}">0</td>
+                <td th:text="${empleado.enActivo}">bool</td>
+                <td th:text="${empleado.genero}">genero</td>
+                <td th:text="${empleado.departamento.nombre}">dep</td>
+                <td><a class="btn btn-info" th:href="@{/editar/{id}(id=${empleado.id})}">Editar</a></td>        		
+                <td><a class="btn btn-danger" th:href="@{/borrar/{id}(id=${empleado.id})}">Borrar</a></td>        		
+              </tr>
+            </tbody>
+          </table>
+          <!-- Añadimos un mensaje de error si lo hay -->
+          <p class="alert alert-info" th:if="${msg!=null}">
+            <span th:text="${msg}">err</span>
+          </p>    
+        </div>
+        <a class="btn btn-primary" th:href="@{/nuevo}">Nuevo empleado</a><br/><br/>
+        <!-- Añadimos un botón para filtrar por salario -->
+        <input class="btn btn-warning"  type="button" onclick="consultarSalario()" value="Salario superior a:" /> <input type="text" id="salario"/><br/><br/>
+        <a  class="btn btn-warning" th:href="@{/listado2}">Listado 2 (salario > media)</a><br/>
+      </div>
+
+      <!--------------------------------------------->
+      <script>
+        function changeGenero(){
+              const select = document.getElementById("selectGenero");
+              if (select.value == "")
+                window.location.href = "/";
+              else
+                window.location.href = "/findByGenero/"+select.value; //Redirigimos a la URL con el género seleccionado
+        }
+        
+        function consultarSalario(){ 
+          var salario = document.getElementById("salario");
+          //Si el campo está vacío, redirigimos a la página principal
+          if (salario.value.length == 0) window.location.href = "/";
+          else window.location.href = "/listado1/"+salario.value; 
+        } 
+
+        function changeDepartamento(){
+            const select = document.getElementById("selectDepto");
+            if (select.value == 0) window.location.href = "/";
+            else window.location.href = "/porDepto/"+select.value; //Redirigimos a la URL con el departamento seleccionado
+        }
+      
+        </script>
+        <!--------------------------------------------->
+  </body>
+</html>
