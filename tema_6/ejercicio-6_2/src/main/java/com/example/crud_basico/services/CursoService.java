@@ -15,4 +15,6 @@ public interface CursoService {
 
     void borrar(Long id);
 
+    List<Curso> buscarPorNombre(String txtNomCursos);
+
 }

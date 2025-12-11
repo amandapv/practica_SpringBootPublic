@@ -13,6 +13,8 @@ import com.example.crud_basico.domain.Curso;
 import com.example.crud_basico.services.CursoService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class CursoController {
@@ -117,4 +119,13 @@ public class CursoController {
         }
         return "redirect:/";
     }
+
+
+    @PostMapping("/filtroPorCurso")
+    public String postMethodName(Curso curso, Model model) {
+        model.addAttribute("listaCursosEncontados", cursoService.buscarPorNombre(curso.getNombre()));
+        model.addAttribute("curso", curso);
+        return "listView";
+    }
+    
 }
