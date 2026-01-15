@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Curso CRUD</title>
+    <style>.cssError{ background-color:red; }</style>
+  </head>
+  <body>
+    <h1>Editar curso</h1>
+    <form method="post" action="#" th:action="@{/editar/{id}/submit(id=${cursoForm.id})}" th:object="${cursoForm}">
+      <input type="hidden" id="id" th:field="*{id}" /> </label>
+
+      <label>Nombre:
+        <input type="text" id="nombre" th:field="*{nombre}" />
+        <span th:classappend="${#fields.hasErrors('nombre')} ? 'cssError'" th:errors="*{nombre}"></span>
+      </label><br/>
+
+      <label>Precio:
+        <input type="text" id="salario" th:field="*{precio}" />
+        <span th:classappend="${#fields.hasErrors('precio')} ? 'cssError'" th:errors="*{precio}"></span>
+      </label><br/>
+
+      Temática:<br/>          
+      <div th:each="tem : ${T(com.example.crud_basico_pract.domain.Tematica).values()}">
+          <input type="radio" name="button1" th:value="${tem}" th:text="${tem}" th:field="*{tematica}" />
+      </div>
+
+      <input  type="submit" value="Enviar" />  
+      <a  th:href="@{/}">Inicio</a>
+    </form>
+  </body>
+</html>
