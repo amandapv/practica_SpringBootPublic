@@ -128,7 +128,7 @@ public class CursoController {
 
         model.addAttribute("listaCursos", cursoServiceImpl.buscarPorTematica(tematica));
         model.addAttribute("tematicaSeleccionada", tematica);
-
+        model.addAttribute("cursoForm", new Curso());
         return "listView";
     }
 }
