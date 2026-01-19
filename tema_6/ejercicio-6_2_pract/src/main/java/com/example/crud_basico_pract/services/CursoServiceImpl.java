@@ -1,8 +1,6 @@
 package com.example.crud_basico_pract.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,6 +14,11 @@ public class CursoServiceImpl implements CursoService {
     private List<Curso> repositorio = new ArrayList<>();
 
     public List<Curso> obtenerTodos() {
+
+        repositorio.sort(
+            Comparator.comparing(Curso::getNombre)
+        );
+
         return repositorio;
     }
 
@@ -71,14 +74,12 @@ public class CursoServiceImpl implements CursoService {
     public List<Curso> buscarPorTematica(Tematica tematica) {
         List<Curso> encontrados = new ArrayList<>();
 
-
-        
         for(Curso curso : repositorio) {
             if (curso.getTematica() == tematica) {
                 encontrados.add(curso);
             }
-            // curso.sort(Comparator<T>.comparing(Curso::getNombre));
         }
         return encontrados;
     }
+
 }
