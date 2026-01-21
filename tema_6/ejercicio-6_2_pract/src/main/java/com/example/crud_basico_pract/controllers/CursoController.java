@@ -12,22 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.crud_basico_pract.domain.Curso;
 import com.example.crud_basico_pract.domain.Tematica;
 import com.example.crud_basico_pract.services.CursoService;
-import com.example.crud_basico_pract.services.CursoServiceImpl;
 import jakarta.validation.Valid;
 
 @Controller
 public class CursoController {
 
-    //private final CursoServiceImpl cursoServiceImpl;
-
     @Autowired
     public CursoService cursoService;
 
     private String txtMsg;
-
-    //CursoController(CursoServiceImpl cursoServiceImpl) {
-       // this.cursoServiceImpl = cursoServiceImpl;
-    //}
 
     @GetMapping({ "/", "/list" })
     public String showList(Model model) {
