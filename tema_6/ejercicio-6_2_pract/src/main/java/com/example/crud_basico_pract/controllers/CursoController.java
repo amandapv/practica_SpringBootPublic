@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 public class CursoController {
 
     @Autowired
-    public CursoService cursoService;
+    private CursoService cursoService;
 
     private String txtMsg;
 
