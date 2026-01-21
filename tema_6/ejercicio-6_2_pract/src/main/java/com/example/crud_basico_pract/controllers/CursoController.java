@@ -18,16 +18,16 @@ import jakarta.validation.Valid;
 @Controller
 public class CursoController {
 
-    private final CursoServiceImpl cursoServiceImpl;
+    //private final CursoServiceImpl cursoServiceImpl;
 
     @Autowired
     public CursoService cursoService;
 
     private String txtMsg;
 
-    CursoController(CursoServiceImpl cursoServiceImpl) {
-        this.cursoServiceImpl = cursoServiceImpl;
-    }
+    //CursoController(CursoServiceImpl cursoServiceImpl) {
+       // this.cursoServiceImpl = cursoServiceImpl;
+    //}
 
     @GetMapping({ "/", "/list" })
     public String showList(Model model) {
@@ -126,7 +126,7 @@ public class CursoController {
     @GetMapping("/findByTematica/{tematica}")
     public String showFindByTematica(@PathVariable Tematica tematica, Model model) {
 
-        model.addAttribute("listaCursos", cursoServiceImpl.buscarPorTematica(tematica));
+        model.addAttribute("listaCursos", cursoService.buscarPorTematica(tematica));
         model.addAttribute("tematicaSeleccionada", tematica);
         model.addAttribute("cursoForm", new Curso());
         return "listView";
