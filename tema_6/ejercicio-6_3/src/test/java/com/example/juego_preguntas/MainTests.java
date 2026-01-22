@@ -1,4 +1,4 @@
-package com.example.cuestionario;
+package com.example.juego_preguntas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
