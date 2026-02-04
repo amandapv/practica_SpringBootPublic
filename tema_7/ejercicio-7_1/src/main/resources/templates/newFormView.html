@@ -11,7 +11,8 @@
     <h1>Nuevo curso</h1>
     <form method="post" action="#" th:action="@{/nuevo/submit}" th:object="${cursoForm}">
             <label>Id:
-              <input type="text" id="id" th:field="*{id}" />
+              <input type="hidden" id="id" th:field="*{id}" />
+              <!-- <input type="text" id="id" readonly th:field="*{id}" /> -->  <!-- otra opción para mostrar el ID sin que se pueda editar -->
               <span th:classappend="${#fields.hasErrors('id')} ? 'cssError'" th:errors="*{id}"></span>
             </label><br/>
 

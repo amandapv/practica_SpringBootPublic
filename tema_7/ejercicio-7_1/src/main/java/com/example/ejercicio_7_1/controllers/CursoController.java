@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.ejercicio_7_1.domain.Curso;
 import com.example.ejercicio_7_1.domain.Tematica;
 import com.example.ejercicio_7_1.services.CursoService;
-import com.example.ejercicio_7_1.services.CursoServiceImpl;
+import com.example.ejercicio_7_1.services.VIEJOCursoServiceImpl;
 
 import jakarta.validation.Valid;
 
 @Controller
 public class CursoController {
 
-    private final CursoServiceImpl cursoServiceImpl;
+    private final VIEJOCursoServiceImpl cursoServiceImpl;
 
     @Autowired
     public CursoService cursoService;
 
     private String txtMsg;
 
-    CursoController(CursoServiceImpl cursoServiceImpl) {
+    CursoController(VIEJOCursoServiceImpl cursoServiceImpl) {
         this.cursoServiceImpl = cursoServiceImpl;
     }
 

@@ -19,8 +19,9 @@ public class Main {
 	@Bean
 	CommandLineRunner initData(CursoService cursoService) {
 		return args -> {
-			cursoService.añadir(new Curso(1L, "DAW", 2000d, Tematica.SISTEMAS));
-			cursoService.añadir(new Curso(2L, "Backend", 500d, Tematica.PROGRAMACION));
+			// IDs = null porque ya no añadimos el número a mano, si no que lo hace Hibernate ya que así lo definimos en el dominio de Curso
+			cursoService.añadir(new Curso(null, "DAW", 2000d, Tematica.SISTEMAS));
+			cursoService.añadir(new Curso(null, "Backend", 500d, Tematica.PROGRAMACION));
 
 		}; 
 	}
