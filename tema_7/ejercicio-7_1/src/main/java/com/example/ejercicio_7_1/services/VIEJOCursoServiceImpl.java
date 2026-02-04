@@ -10,7 +10,7 @@ import com.example.ejercicio_7_1.domain.Curso;
 import com.example.ejercicio_7_1.domain.Tematica;
 
 @Service
-public class VIEJOCursoServiceImpl implements CursoService {
+public class VIEJOCursoServiceImpl  {
     private List<Curso> repositorio = new ArrayList<>();
 
     public List<Curso> obtenerTodos() {

@@ -19,4 +19,6 @@ public interface CursoService {
     List<Curso> buscarPorNombre(String textoNombre);
 
     List<Curso> buscarPorTematica(Tematica tematica);
+
+    List<Curso> filtrarImporteMenorIgualPrecio(Double precio);
 }

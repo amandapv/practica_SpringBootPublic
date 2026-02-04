@@ -10,11 +10,11 @@
   <body>
     <h1>Nuevo curso</h1>
     <form method="post" action="#" th:action="@{/nuevo/submit}" th:object="${cursoForm}">
-            <label>Id:
+            <!-- <label>Id: -->
               <input type="hidden" id="id" th:field="*{id}" />
               <!-- <input type="text" id="id" readonly th:field="*{id}" /> -->  <!-- otra opción para mostrar el ID sin que se pueda editar -->
               <span th:classappend="${#fields.hasErrors('id')} ? 'cssError'" th:errors="*{id}"></span>
-            </label><br/>
+            <!-- </label><br/> -->
 
             <label>Nombre:
               <input type="text" id="nombre" th:field="*{nombre}" />
@@ -27,7 +27,7 @@
             </label><br/>
 
             Temática:<br/>          
-            <div th:each="tem : ${T(com.example.crud_basico_pract.domain.Tematica).values()}">
+            <div th:each="tem : ${T(com.example.ejercicio_7_1.domain.Tematica).values()}">
                 <input type="radio" name="button1" th:value="${tem}" th:text="${tem}" th:field="*{tematica}" />
             </div>
 

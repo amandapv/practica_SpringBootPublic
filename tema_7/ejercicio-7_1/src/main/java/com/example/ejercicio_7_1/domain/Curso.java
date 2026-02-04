@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor //Crea un constructor para todos los campos
+@AllArgsConstructor //Cr/editar/{id}/submitea un constructor para todos los campos
 @NoArgsConstructor //en cuanto se añade el @AllArgsConstructor, Java "borra" el constructor vacío automático. Pero Hibernate/JPA necesita el constructor vacío para poder recuperar datos de la base de datos. Sin esta, tu aplicación daría error al intentar leer de la BD. Este campo dice que cree un constrcutor vacío para que Hibernate pueda "funcionar"
 @EqualsAndHashCode(of = "id")
 
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Curso {
     @Id //marca el campo "id" como Clave Primaria (PK) para distinguir un curso de otro
     @GeneratedValue (strategy = GenerationType.IDENTITY)   //le dice a la BBDD que cada vez que inserte un curso, ésta le asigne el 1, luego el 2, etc
-    @NotNull(message = "El ID no puede estar vacío")
+    // @NotNull(message = "El ID no puede estar vacío")
     @Min(value = 0, message = "El ID no puede ser inferior a 0")
     private Long id;
 

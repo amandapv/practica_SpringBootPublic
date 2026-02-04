@@ -45,27 +45,44 @@
 
       <br>
       <a href="/list">Restablecer</a>
+
+      <br><br>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Nombre</th>
+            <th>Editar</th><th>Borrar</th></tr>
+        </thead>
+        <tbody>
+          <tr th:each="curso : ${listaCursos}">
+            <td th:text="${curso.id}">Id</td>
+            <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
+            <td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
+            <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
+          </tr>
+        </tbody>
+      </table>  <br>
+      
+      <a th:href="@{/nuevo}">Nuevo curso</a>
+      
+      <br/><br>
+
+      <!-- th:formaction es para poner el Path del controlador, sin tener que usar una función onclick de JS -->
+      <button type="submit" th:formaction="@{/findByPrecioLessThan}">Precio menor a:</button>
+      <input type="number" th:field="*{precio}">
+
     </form>
-
-    <br><br>
-
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th><th>Nombre</th>
-          <th>Editar</th><th>Borrar</th></tr>
-      </thead>
-      <tbody>
-        <tr th:each="curso : ${listaCursos}">
-          <td th:text="${curso.id}">Id</td>
-          <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
-          <td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
-          <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
-        </tr>
-      </tbody>
-    </table>  
     
-    <a th:href="@{/nuevo}">Nuevo curso</a><br/>
+
+    <!-- <input type="button" onclick="consultarPrecio()" value="Precio menor a:" />
+    <script>
+      function consultarPrecio(){
+        window.location.href = "/findByPrecioLessThan";
+      }
+    </script>
+    <input type="text" > -->
+
 
     <div th:if="${msg!=null}">
       <br>
