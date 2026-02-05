@@ -12,7 +12,7 @@ import com.example.ejercicio_7_2.repositories.CursoReporitory;
 
 
 @Service
-@Primary //como hay dos clases que implementan CursoService, hay que indicarle cuál queremos que (al inyectar en el controlador) coja y por tanto, use por defecto para su implementación
+//@Primary //ELIMINÉ EL SERVICIO EN MEMORIA ANTIGUO --- como hay dos clases que implementan CursoService, hay que indicarle cuál queremos que (al inyectar en el controlador) coja y por tanto, use por defecto para su implementación
 public class CursoServiceImplBD implements CursoService{
     
     @Autowired
