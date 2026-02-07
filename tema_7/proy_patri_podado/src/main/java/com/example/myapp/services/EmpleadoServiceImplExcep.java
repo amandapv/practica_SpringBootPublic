@@ -15,6 +15,8 @@ import com.example.myapp.repositories.EmpleadoRepository;
 public class EmpleadoServiceImplExcep implements EmpleadoService {
 
     // Inyectamos el repositorio de Empleado para poder hacer las operaciones
+    @Autowired
+    private EmpleadoRepository repositorio;
     /*Codigo aquí a escribir */
 
     private final Double MIN_SALAR = 18000D;
@@ -23,13 +25,13 @@ public class EmpleadoServiceImplExcep implements EmpleadoService {
         return repositorio.findAll(Sort.by(Sort.Direction.ASC, "nombre"));
     }
 
-    public Empleado obtenerPorId(long id) throws RuntimeException {
-        return /*Codigo aquí a escribir */;
-        // findById de JpaRepository devuelve un Optional. Para simplificar,
-        // y que el servicio siga devolviendo Empleado y no Optional<Empleado>
-        // hacemos que si no lo encuentra, lance una excepción. La otra opción sería
-        // que devolviese null: return repositorio.findById(id).orElse(null);
-    }
+    // public Empleado obtenerPorId(long id) throws RuntimeException {
+    //     return /*Codigo aquí a escribir */;
+    //     // findById de JpaRepository devuelve un Optional. Para simplificar,
+    //     // y que el servicio siga devolviendo Empleado y no Optional<Empleado>
+    //     // hacemos que si no lo encuentra, lance una excepción. La otra opción sería
+    //     // que devolviese null: return repositorio.findById(id).orElse(null);
+    // }
 
     public Empleado añadir(Empleado empleado) throws RuntimeException {
         // Comprobamos que el salario no sea muy bajo
@@ -38,37 +40,37 @@ public class EmpleadoServiceImplExcep implements EmpleadoService {
         Departamento departamento = empleado.getDepartamento();
         // Comprobamos que no se sobrepase el presupuesto del departamento
         Double sumaSalariosDepto = obtenerSumaSalarioPorDepartamento(departamento);
-        if (sumaSalariosDepto + empleado.getSalario() > departamento.getPresupuesto())
-           throw new RuntimeException("Sobrepasa presupuesto de departamento");
+        // if (sumaSalariosDepto + empleado.getSalario() > departamento.getPresupuesto())
+        //    throw new RuntimeException("Sobrepasa presupuesto de departamento");
         return repositorio.save(empleado);
     }
 
     public Empleado editar(Empleado empleado) throws RuntimeException {
         //empleado contiene los datos nuevos, empleadoSinEditar los datos antiguos
-        Empleado empleadoSinEditar = obtenerPorId(empleado.getId()); // lanza excepción si no existe
+        // Empleado empleadoSinEditar = obtenerPorId(empleado.getId()); // lanza excepción si no existe
         // Comprobamos que el salario no sea muy bajo
         if (empleado.getSalario() < MIN_SALAR)
             throw new RuntimeException("Salario muy bajo");
 
         Departamento departamentoNuevo = empleado.getDepartamento();
-        Departamento departamentoViejo = empleadoSinEditar.getDepartamento();
+        // Departamento departamentoViejo = empleadoSinEditar.getDepartamento();
         Double sumaSalariosDeptoNuevo = obtenerSumaSalarioPorDepartamento(departamentoNuevo);
         
-        if (departamentoNuevo.equals(departamentoViejo))  {  //no cambia de departamento
-            // Comprobamos que no se sobrepase el presupuesto del departamento
-            if (sumaSalariosDeptoNuevo + empleado.getSalario() - empleadoSinEditar.getSalario()> departamentoNuevo.getPresupuesto())
-               throw new RuntimeException("Sobrepasa presupuesto de departamento");
-        }
-        else { //cambia de departamento 
-            // Comprobamos que no se sobrepase el presupuesto del departamento nuevo
-            if (sumaSalariosDeptoNuevo + empleado.getSalario() > departamentoNuevo.getPresupuesto())
-            throw new RuntimeException("Sobrepasa presupuesto de departamento");
-        }
+        // if (departamentoNuevo.equals(departamentoViejo))  {  //no cambia de departamento
+        //     // Comprobamos que no se sobrepase el presupuesto del departamento
+        //     if (sumaSalariosDeptoNuevo + empleado.getSalario() - empleadoSinEditar.getSalario()> departamentoNuevo.getPresupuesto())
+        //        throw new RuntimeException("Sobrepasa presupuesto de departamento");
+        // }
+        // else { //cambia de departamento 
+        //     // Comprobamos que no se sobrepase el presupuesto del departamento nuevo
+        //     if (sumaSalariosDeptoNuevo + empleado.getSalario() > departamentoNuevo.getPresupuesto())
+        //     throw new RuntimeException("Sobrepasa presupuesto de departamento");
+        // }
         return repositorio.save(empleado);
     }
 
     public void borrar(Long id) throws RuntimeException {
-        obtenerPorId(id); // lanza excepción si no existe
+        // obtenerPorId(id); // lanza excepción si no existe
         repositorio.deleteById(id);
     }
 

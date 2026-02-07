@@ -11,8 +11,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+// @AllArgsConstructor
+// @NoArgsConstructor
 @EqualsAndHashCode(of = "id") // Busca si dos objetos son iguales por el id
 
 /*Codigo aquí a escribir */

@@ -21,8 +21,8 @@ public class Main {
 	@Bean
 	CommandLineRunner initData(EmpleadoService empleadoService, DepartamentoService departamentoService) {
 		return args -> {
-			Departamento depInf = departamentoService.añadir(new Departamento(0L, "Informática",1000000D));
-			Departamento depRRHH = departamentoService.añadir(new Departamento(0L, "RRHH", 1000000D));
+			Departamento depInf = departamentoService.añadir(new Departamento());
+			Departamento depRRHH = departamentoService.añadir(new Departamento());
 
 			empleadoService.añadir(
 					new Empleado(null, "López Pérez, José", "jlp@gmail.com", 18000d, true, Genero.MASCULINO, depInf));

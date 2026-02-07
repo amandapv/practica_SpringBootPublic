@@ -10,7 +10,7 @@ public interface EmpleadoService {
 
     List<Empleado> obtenerTodos();
 
-    Empleado obtenerPorId(long id) throws RuntimeException;
+    // Empleado obtenerPorId(long id) throws RuntimeException;
 
     Empleado añadir(Empleado empleado);
 

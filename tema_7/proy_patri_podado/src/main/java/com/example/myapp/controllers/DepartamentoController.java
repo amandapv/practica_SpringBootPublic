@@ -20,13 +20,15 @@ import jakarta.validation.Valid;
 public class DepartamentoController {
 
   /*Codigo aquí a escribir */
+    @Autowired 
+    private DepartamentoService departamentoService;
 
     private String txtMsg;
 
     // http://localhost:9000/depto/list
     @GetMapping({ "/", "/list" })
     public String showList(Model model) {
-        model.addAttribute("listaDepartamentos",/*Codigo aquí a escribir */);
+        model.addAttribute("listaDepartamentos"/*Codigo aquí a escribir */);
         if (txtMsg != null) {
             model.addAttribute("msg", txtMsg);
             txtMsg = null;
@@ -60,9 +62,9 @@ public class DepartamentoController {
     // http://localhost:9000/depto/edit/1
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable long id, Model model) {
-        Departamento departamento = /*Codigo aquí a escribir */
+        Departamento departamento = departamentoService.obtenerPorId(id);/*Codigo aquí a escribir */
         if (departamento != null) {
-           /*Codigo aquí a escribir */
+           return "asdsa";
         } else {
             return "redirect:/depto/list";
         }
