@@ -9,8 +9,8 @@
   </head>
   <body>
     <h1>Editar curso</h1>
-    <form method="post" action="#" th:action="@{/editar/{id}/submit(id=${cursoForm.id})}" th:object="${cursoForm}">
-      <input type="hidden" id="id" th:field="*{id}" /> </label>
+    <form method="post" action="#" th:action="@{/editar/submit}" th:object="${cursoForm}">
+      <input type="hidden" id="id" th:field="*{id}" />
 
       <label>Nombre:
         <input type="text" id="nombre" th:field="*{nombre}" />
@@ -23,11 +23,23 @@
       </label><br/>
 
       Temática:<br/>          
-      <div th:each="tem : ${T(com.example.crud_basico_pract.domain.Tematica).values()}">
+      <div th:each="tem : ${T(com.example.ejercicio_7_2.domain.Tematica).values()}">
           <input type="radio" name="button1" th:value="${tem}" th:text="${tem}" th:field="*{tematica}" />
       </div>
 
+      Autor:
+      <select name="autor" th:field="*{autor}">
+        <option th:each="autor : ${listaAutores}"
+                th:value="${autor.id}" th:text="${autor.nombre}">
+        </option>
+      </select>
+
+      <br><br>
+
       <input  type="submit" value="Enviar" />  
+
+      <br>
+
       <a  th:href="@{/}">Inicio</a>
     </form>
   </body>

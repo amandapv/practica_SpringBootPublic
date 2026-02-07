@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.ejercicio_7_2.domain.Autor;
 import com.example.ejercicio_7_2.domain.Curso;
 import com.example.ejercicio_7_2.domain.Tematica;
+import com.example.ejercicio_7_2.services.AutorService;
 import com.example.ejercicio_7_2.services.CursoService;
 
 import jakarta.validation.Valid;
@@ -19,7 +21,10 @@ import jakarta.validation.Valid;
 public class CursoController {
 
     @Autowired
-    public CursoService cursoService;
+    private CursoService cursoService;
+
+    @Autowired 
+    private AutorService autorService;    
 
     private String txtMsg;
 
@@ -54,16 +59,17 @@ public class CursoController {
     public String showNew(Model model) {
         // el commandobject del formulario es una instancia de curso vacia
         model.addAttribute("cursoForm", new Curso());
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
         return "newFormView";
     }
 
     @PostMapping("/nuevo/submit")
-    public String showNewSubmit(@Valid @ModelAttribute("cursoForm") Curso cursoForm, BindingResult bindingResult) {
+    public String showNewSubmit(@Valid @ModelAttribute("cursoForm") Curso cursoForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             // model.addAttribute("cursoForm", cursoForm); // No hace falta añadir al model si el nombre coincide con @ModelAttribute
+            model.addAttribute("listaAutores", autorService.obtenerTodos()); // Si hay errores, hay que volver a cargar la lista de autores para el select. Tengo que traerlos de vuelta (a diferencia de la Tematica) porque está en grabada en el ccódigo Java y los autores son registros de una BBDD
             return "newFormView";
         }
-
         try {
             cursoService.añadir(cursoForm);
             txtMsg = "Operación realizada con éxito";
@@ -79,6 +85,8 @@ public class CursoController {
         try {
             Curso curso = cursoService.obtenerPorId(id);
             model.addAttribute("cursoForm", curso);
+            model.addAttribute("listaAutores", autorService.obtenerTodos());
+            // model.addAttribute("autorSeleccionado", autorService.obtenerPorId(id));
         } catch (Exception e) {
             txtMsg = e.getMessage();
             return "redirect:/";
@@ -86,8 +94,8 @@ public class CursoController {
         return "editFormView";
     }
 
-    @PostMapping("/editar/{id}/submit")
-    public String showEditSubmit(@PathVariable Long id, @Valid @ModelAttribute("cursoForm") Curso cursoForm, BindingResult bindingResult) {
+    @PostMapping("/editar/submit") //no necesito pasarle el ID por path
+    public String showEditSubmit(@Valid @ModelAttribute("cursoForm") Curso cursoForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // model.addAttribute("cursoForm", cursoForm); // No hace falta añadir al model si el nombre coincide con @ModelAttribute
             return "editFormView";
