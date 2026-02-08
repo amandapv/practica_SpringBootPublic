@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{/fragmentos.html::cabecera}"></head>
+  <body>
+    
+    <nav th:replace="~{/fragmentos.html::menu}"></nav>
+
+    <h1>Listado de cursos</h1>
+
+    <form action="#" method="post" th:action="@{/findByName}" th:object="${cursoForm}" >
+      <label> Buscar por nombre:
+        <input type="text" name="nombre" th:field="*{nombre}"/>
+      </label>
+      <input type="submit" value="Buscar"/>
+
+      <br>
+
+      <label> Filtro por temática:
+
+        <!-- NO FUNCIONA tematicaSeleccionada, NO SE QUEDA SELECCIONADA LA TEMÁTICA -->
+        <select id="tematica" onchange="changeTematica();">
+          <option value="">Todos</option>
+          <option 
+            th:each="tem : ${T(com.example.ejercicio_7_3.domain.Tematica).values()}"
+            th:value="${tem}" th:text="${tem}"
+            th:selected="${tem} == ${tematicaSeleccionada} ? true : false">
+          </option>
+        </select>
+
+        <script>
+          function changeTematica() {
+            const select = document.getElementById("tematica");
+            if (select.value == "") {
+              window.location.href = "/";
+            } else {
+              window.location.href = "/findByTematica/"+select.value;
+            }
+          }
+        </script>
+      </label>
+
+      <br>
+      <a href="/list">Restablecer</a>
+
+      <br><br>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Nombre</th>
+            <th>Precio</th><th>Autor</th>
+            <th>Editar</th><th>Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="curso : ${listaCursos}">
+            <td th:text="${curso.id}">Id</td>
+            <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
+            <td><a th:text="${curso.precio}">precio</a></td>
+            <td><a th:text="${curso.autor.nombre}">autor</a></td>
+            <td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
+            <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
+          </tr>
+        </tbody>
+      </table>  <br>
+      
+      <a th:href="@{/nuevo}">Nuevo curso</a>
+      
+      <br/><br>
+
+      <!-- th:formaction es para poner el Path del controlador, sin tener que usar una función onclick de JS -->
+      <button type="submit" th:formaction="@{/findByPrecioLessThan}">Precio menor a:</button>
+      <input type="number" th:field="*{precio}">
+
+    </form>
+    
+
+    <!-- <input type="button" onclick="consultarPrecio()" value="Precio menor a:" />
+    <script>
+      function consultarPrecio(){
+        window.location.href = "/findByPrecioLessThan";
+      }
+    </script>
+    <input type="text" > -->
+
+
+    <div th:if="${msg!=null}">
+      <br>
+      <p class="alert alert-primary" role="alert" th:text="${msg}">err</p>
+    </div>
+  </body>
+</html>
