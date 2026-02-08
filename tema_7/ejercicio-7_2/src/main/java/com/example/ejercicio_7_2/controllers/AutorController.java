@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,7 @@ public class AutorController {
     }
 
     @PostMapping("/new/submit")
-    public String showNewSubmit(@Valid Autor autorForm, BindingResult bindingResult) {
+    public String showNewSubmit(@Valid @ModelAttribute("autorForm") Autor autorForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "autor/newFormView";
         }
@@ -92,7 +93,13 @@ public class AutorController {
 
     @GetMapping("/delete/{id}")
     public String showDelete(@PathVariable long id) {
-        autorService.borrar(id);
+        try {
+            autorService.borrar(id);
+        } catch (Exception e) {
+            txtMsg = e.getMessage();
+            return "redirect:/autor/list";
+        }
+       
         return "redirect:/autor/list";
     }
 

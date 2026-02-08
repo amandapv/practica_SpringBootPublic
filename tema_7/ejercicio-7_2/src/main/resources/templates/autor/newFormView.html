@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{/fragmentos.html::cabecera}"></head>
+  
+<body>
+  <nav th:replace="~{/fragmentos.html::menu}"></nav>
+
+  <form action="#" method="post" th:action="@{/autor/new/submit}" th:object="${autorForm}">
+
+    <input type="hidden" id="id" th:field="*{id}"> <br>
+
+    <label>Nombre:
+        <input type="text" th:field="*{nombre}">
+        <span th:classappend="${#fields.hasErrors('nombre')} ? 'cssError'" th:errors="*{nombre}"></span>
+    </label> <br><br>
+
+    <label>Email:
+        <input type="email" id="email" th:field="*{email}">
+    </label> <br><br>
+
+    <input type="submit" value="Enviar">
+
+  </form>
+
+  <div th:if="${msg!=null}">
+    <br>
+    <p class="alert alert-danger" role="alert" th:text="${msg}">err</p>
+  </div> 
+
+  <br><br>
+
+  <a th:href="@{/}">Inicio</a><br/>
+
+</body>
+</html>

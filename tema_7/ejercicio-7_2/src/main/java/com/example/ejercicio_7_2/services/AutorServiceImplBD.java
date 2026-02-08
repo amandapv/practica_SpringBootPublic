@@ -37,9 +37,16 @@ public class AutorServiceImplBD implements AutorService {
         return repositorio.save(autor);
     }
 
-    public void borrar(long id) {
-        obtenerPorId(id);
-        repositorio.deleteById(id);
+    public void borrar(long id) throws RuntimeException{
+        Long cantidadCursosAutor = repositorio.cantidadCursosAutor(id);
+        if (cantidadCursosAutor == 0) {
+            repositorio.deleteById(id);
+        } else {
+            throw new RuntimeException("Hay cursos asignados a este autor, por favor, elimine los cursos previamente");
+        }
+        //esto no sirve porque se produce una excepción debido a que si intentamos eliminar un autor que tiene cursos asignados, quedarán cursos con un autor inexistente asignado
+        // obtenerPorId(id);
+        // repositorio.deleteById(id);
     }
 
     public Autor obtenerPorNombre(String nombre) {

@@ -34,7 +34,6 @@ public class CursoServiceImplBD implements CursoService{
 
 
     public Curso añadir (Curso curso) throws RuntimeException{
-
         //Valida que el ID no exista previamente para asegurar que estamos creando un registro nuevo y no sobrescribiendo uno existente
         if (curso.getId() != null) {
             if (repositorio.existsById(curso.getId())) { //si ya hay un curso con ese ID -- existsById devuelve true o false, para confirmar si existe o no el ID
