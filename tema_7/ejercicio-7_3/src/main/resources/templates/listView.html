@@ -16,13 +16,12 @@
       <br>
 
       <label> Filtro por temática:
-
         <!-- NO FUNCIONA tematicaSeleccionada, NO SE QUEDA SELECCIONADA LA TEMÁTICA -->
         <select id="tematica" onchange="changeTematica();">
           <option value="">Todos</option>
           <option 
             th:each="tem : ${T(com.example.ejercicio_7_3.domain.Tematica).values()}"
-            th:value="${tem}" th:text="${tem}"
+            th:value="${tem.name()}" th:text="${tem}"
             th:selected="${tem} == ${tematicaSeleccionada} ? true : false">
           </option>
         </select>
@@ -37,7 +36,29 @@
             }
           }
         </script>
-      </label>
+      </label> <br>
+
+      <label>Filtro por autor:
+        <select id="autores" onchange="changeAutor();">
+          <option value="">Todos</option>
+          <option th:each="autor : ${listaAutores}"
+                  th:value="${autor.id}" th:text="${autor.nombre}"
+                  th:selected="${autor.id} == ${idAutorSeleccionado} ? true : false">
+          </option>
+
+          <script>
+            function changeAutor() {
+              const select = document.getElementById("autores");
+              if (select.value == "") {
+                window.location.href = "/";
+              } else {
+                window.location.href = "/findByAutor/"+select.value;
+              }
+            }
+          </script>
+
+        </select>
+      </label> 
 
       <br>
       <a href="/list">Restablecer</a>

@@ -10,12 +10,16 @@
     <input type="hidden" id="id" th:field="*{id}"> <br>
 
     <label>Nombre:
-        <input type="text" th:field="*{nombre}">
-        <span th:classappend="${#fields.hasErrors('nombre')} ? 'cssError'" th:errors="*{nombre}"></span>
+      <input type="text" th:field="*{nombre}">
+      <span th:classappend="${#fields.hasErrors('nombre')} ? 'cssError'" th:errors="*{nombre}"></span>
     </label> <br><br>
 
     <label>Email:
-        <input type="email" id="email" th:field="*{email}">
+      <input type="email" id="email" th:field="*{email}">
+    </label> <br><br>
+
+    <label>Límite de precio en la totalidad de sus cursos:
+      <input type="number" id="totalCursosLimite" th:field="*{limiteCosteTotalCursos}">
     </label> <br><br>
 
     <input type="submit" value="Enviar">

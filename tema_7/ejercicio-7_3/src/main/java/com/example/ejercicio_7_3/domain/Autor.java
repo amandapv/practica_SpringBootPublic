@@ -1,5 +1,6 @@
 package com.example.ejercicio_7_3.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,9 +24,13 @@ public class Autor {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique=true) //hacemos que la columna no pueda contener duplicados, es decir, que no puede haber más de un nombre igual
     @NotEmpty(message = "El nombre no puede estar vacío")
     private String nombre;
 
+    @Column(unique=true)
     @Email(message = "Formato no admitido")
     private String email;
+
+    private Double limiteCosteTotalCursos;
 }

@@ -77,7 +77,7 @@ public class AutorController {
     }
 
     @PostMapping("/edit/submit")
-    public String showEditSubmit(@Valid Autor autorForm, BindingResult bindingResult) {
+    public String showEditSubmit(@Valid @ModelAttribute("autorForm") Autor autorForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "editFormView";
         }

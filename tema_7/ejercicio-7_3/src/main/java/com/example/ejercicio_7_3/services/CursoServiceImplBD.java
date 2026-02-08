@@ -6,8 +6,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+import com.example.ejercicio_7_3.domain.Autor;
 import com.example.ejercicio_7_3.domain.Curso;
 import com.example.ejercicio_7_3.domain.Tematica;
+import com.example.ejercicio_7_3.repositories.AutorRepository;
 import com.example.ejercicio_7_3.repositories.CursoReporitory;
 
 
@@ -17,6 +19,9 @@ public class CursoServiceImplBD implements CursoService{
     
     @Autowired
     private CursoReporitory repositorio; //Ahora "repositorio" es un objeto de Acceso a Datos (DAO) (antes era un ArrayList)
+
+    @Autowired
+    private AutorRepository autorRepositorio;
 
     public List<Curso> obtenerTodos() {
         //devuelve todos los cursos que haya encontrado
@@ -35,10 +40,23 @@ public class CursoServiceImplBD implements CursoService{
 
     public Curso añadir (Curso curso) throws RuntimeException{
         //Valida que el ID no exista previamente para asegurar que estamos creando un registro nuevo y no sobrescribiendo uno existente
-        if (curso.getId() != null) {
-            if (repositorio.existsById(curso.getId())) { //si ya hay un curso con ese ID -- existsById devuelve true o false, para confirmar si existe o no el ID
-                throw new RuntimeException("Curso ya existente con ese ID");
-            }
+        if (curso.getId() != null && repositorio.existsById(curso.getId())) { //si ya hay un curso con ese ID -- existsById devuelve true o false, para confirmar si existe o no el ID
+            throw new RuntimeException("Curso ya existente con ese ID");
+        }
+
+        //BUSCAR EL AUTOR REAL para tener su límite actualizado. Ya que cuando recibes un objeto Curso desde un formulario web (Thymeleaf), el objeto Autor que lleva dentro suele estar "hueco". Normalmente solo tiene el id que viene del <select>
+        //usamos el autorRepositorio para traer los datos frescos de la BD
+        //esto es opcional pero me gusta dejarlo por la posibilidad de que falle lo anteriormente mencionado
+        Autor autorReal = autorRepositorio.findById(curso.getAutor().getId()).orElseThrow( () -> new RuntimeException("No se encuentra ese autor") ); 
+
+        Double total = autorRepositorio.sumaPrecioTotalCursosAutor(autorReal.getId());
+
+        //EN VEZ DE COMPROBARLO EN EL SERVICE, PODRÍA PONERSE EN LA @QUERY (lo dejaré comentado en el repositorio)
+        if (total == null) { //si el total de la suma es null, ponle un 0 y así no salta el error
+            total = 0.0;
+        }
+        if (total + curso.getPrecio() > autorReal.getLimiteCosteTotalCursos()) { //si el total de precio de los cursos del autor + el precio del curso que estamos añadiendo es mayor qué el límite de precio establecido para todos los cursos de ese autor... 
+            throw new RuntimeException("Sobrepasa el límite total de precio en sus cursos");
         }
         return repositorio.save(curso);
     }
@@ -47,6 +65,16 @@ public class CursoServiceImplBD implements CursoService{
     //paso por parámetro un curso porque normalmente, cuando un usuario está en una página web para editar, ya ha rellenado un formulario, por eso no paso por parámetro el ID
     public Curso editar (Curso curso) throws RuntimeException{ //no hace falta poner RuntimeException, pero queda más claro para saber que sí se maneja si existe o no ese ID de curso (se maneja en el método obtenerPorId que llamamos aquí dentro)
         obtenerPorId(curso.getId()); //obtenemos el curso llamando al método definido anteriormente pmos el curso llamando al método definido anteriormente para buscar un curso por su ID (este lanzará una excepción si no lo encuentra)... para buscar un curso por su ID (este lanzará una excepción si no lo encuentra)... ¿Qué devuelve?: Un Optional<T>. Esto es una "caja" que puede contener el objeto o estar vacía.
+       
+        Autor autorReal = autorRepositorio.findById(curso.getAutor().getId()).orElseThrow( () -> new RuntimeException("No se encuentra ese autor") ); //obtenemos el id del autor al que queremos revisarle el precio total de sus cursos
+        Double total = autorRepositorio.sumaPrecioTotalCursosAutorV2(autorReal.getId());
+
+        Curso precioViejo = obtenerPorId(curso.getId()); //antes de poder realizar la actualización hay que traerse de la BBDD el precio antiguo de ese curso
+
+        if (total - precioViejo.getPrecio() + curso.getPrecio() > autorReal.getLimiteCosteTotalCursos()) { //si el total de precio de los cursos del autor - el precio antiguo de ese curso + el precio del curso que estamos actualizando es mayor qué el límite de precio establecido para todos los cursos de ese autor... 
+            throw new RuntimeException("Sobrepasa el límite total de precio en sus cursos");
+        }
+
         return repositorio.save(curso); //y lo guardamos
     }
 
@@ -71,4 +99,9 @@ public class CursoServiceImplBD implements CursoService{
     public List<Curso> filtrarImporteMenorIgualPrecio(Double precio) {
         return repositorio.findByPrecioLessThanEqual(precio);
     }
+
+    public List<Curso> buscarPorAutorId(long idAutor) {
+        return repositorio.findByAutorId(idAutor);
+    }
+
 }

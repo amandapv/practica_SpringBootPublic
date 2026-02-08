@@ -36,6 +36,7 @@ public class CursoController {
     public String showList(Model model) {
         model.addAttribute("listaCursos", cursoService.obtenerTodos());
         model.addAttribute("cursoForm", new Curso()); //hay que añadirle el curso porque en el archivo listView lo requiere para el filtro de la busqueda
+        model.addAttribute("listaAutores", autorService.obtenerTodos());
         if (txtMsg != null) {
             model.addAttribute("msg", txtMsg);
             txtMsg = null;
@@ -128,20 +129,28 @@ public class CursoController {
         return "listView";
     }
 
-
     @GetMapping("/findByTematica/{tematica}")
     public String showFindByTematica(@PathVariable Tematica tematica, Model model) {
 
         model.addAttribute("listaCursos", cursoService.buscarPorTematica(tematica));
         model.addAttribute("tematicaSeleccionada", tematica);
         model.addAttribute("cursoForm", new Curso());
+        model.addAttribute("listaAutores", autorService.obtenerTodos()); //cargamos la lista de autores para que el <select> siga funcionando. Es decir Lista COMPLETA de autores para el select
         return "listView";
     }
-
 
     @PostMapping("/findByPrecioLessThan")
     public String showFindByPrecioLessThan(@ModelAttribute("cursoForm") Curso curso, Model model) {
         model.addAttribute("listaCursos", cursoService.filtrarImporteMenorIgualPrecio(curso.getPrecio()));
+        return "listView";
+    }
+
+    @GetMapping("/findByAutor/{idAutor}")
+    public String showFindByAutor(@PathVariable Long idAutor, Model model) {
+        model.addAttribute("listaCursos", cursoService.buscarPorAutorId(idAutor)); //Cursos FILTRADOS para la tabla por autor
+        model.addAttribute("cursoForm", new Curso()); //Cargamos el objeto que pide el formulario en listView.html
+        model.addAttribute("listaAutores", autorService.obtenerTodos()); //cargamos la lista de autores para que el <select> siga funcionando. Es decir Lista COMPLETA de autores para el select
+        model.addAttribute("idAutorSeleccionado", idAutor); //Paso el ID seleccionado para que el select se quede marcado
         return "listView";
     }
 }

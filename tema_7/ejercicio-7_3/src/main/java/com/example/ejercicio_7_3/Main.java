@@ -21,8 +21,8 @@ public class Main {
 	@Bean
 	CommandLineRunner initData(AutorService autorService, CursoService cursoService) {
 		return args -> {
-			Autor kurisu = autorService.añadir(new Autor(null, "Kurisu Makise", "makise@edu.com"));
-			Autor okabe = autorService.añadir(new Autor(null, "Rintaro Okabe", "rintaro@edu.com"));
+			Autor kurisu = autorService.añadir(new Autor(null, "Kurisu Makise", "makise@edu.com",5000.0));
+			Autor okabe = autorService.añadir(new Autor(null, "Rintaro Okabe", "rintaro@edu.com", 2000.0));
 			// IDs = null porque ya no añadimos el número a mano, si no que lo hace Hibernate ya que así lo definimos en el dominio de Curso
 			cursoService.añadir(new Curso(null, "DAW", 2000d, Tematica.SISTEMAS, kurisu));
 			cursoService.añadir(new Curso(null, "Backend", 500d, Tematica.PROGRAMACION, okabe));

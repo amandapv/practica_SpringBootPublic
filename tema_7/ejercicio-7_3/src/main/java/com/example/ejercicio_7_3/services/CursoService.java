@@ -2,6 +2,7 @@ package com.example.ejercicio_7_3.services;
 
 import java.util.List;
 
+import com.example.ejercicio_7_3.domain.Autor;
 import com.example.ejercicio_7_3.domain.Curso;
 import com.example.ejercicio_7_3.domain.Tematica;
 
@@ -21,4 +22,6 @@ public interface CursoService {
     List<Curso> buscarPorTematica(Tematica tematica);
 
     List<Curso> filtrarImporteMenorIgualPrecio(Double precio);
+
+    List<Curso> buscarPorAutorId(long autor);
 }
