@@ -9,7 +9,7 @@ import com.example.ejercicio_7_4.domain.Autor;
 import com.example.ejercicio_7_4.domain.Curso;
 import com.example.ejercicio_7_4.domain.Tematica;
 import com.example.ejercicio_7_4.repositories.AutorRepository;
-import com.example.ejercicio_7_4.repositories.CursoReporitory;
+import com.example.ejercicio_7_4.repositories.CursoRepository;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class CursoServiceImplBD implements CursoService{
     
     @Autowired
-    private CursoReporitory repositorio; //Ahora "repositorio" es un objeto de Acceso a Datos (DAO) (antes era un ArrayList)
+    private CursoRepository repositorio; //Ahora "repositorio" es un objeto de Acceso a Datos (DAO) (antes era un ArrayList)
 
     @Autowired
     private AutorRepository autorRepositorio;

@@ -2,7 +2,6 @@ package com.example.ejercicio_7_4.services;
 
 import java.util.List;
 
-import com.example.ejercicio_7_4.domain.Autor;
 import com.example.ejercicio_7_4.domain.Curso;
 import com.example.ejercicio_7_4.domain.Tematica;
 

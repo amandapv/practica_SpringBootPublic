@@ -70,6 +70,7 @@
           <tr>
             <th>ID</th><th>Nombre</th>
             <th>Precio</th><th>Autor</th>
+            <th>Vídeos del curso</th>
             <th>Editar</th><th>Borrar</th>
           </tr>
         </thead>
@@ -79,6 +80,7 @@
             <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
             <td><a th:text="${curso.precio}">precio</a></td>
             <td><a th:text="${curso.autor.nombre}">autor</a></td>
+            <td><a th:href="@{/video/curso/{idCurso}(idCurso=${curso.id})}">Vídeos del curso</a></td>
             <td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
             <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
           </tr>

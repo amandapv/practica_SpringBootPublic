@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.ejercicio_7_4.domain.Curso;
 import com.example.ejercicio_7_4.domain.Tematica;
 
-public interface CursoReporitory extends JpaRepository<Curso, Long> {
+public interface CursoRepository extends JpaRepository<Curso, Long> {
 
     //método para buscar cursos por nombre introducido
     List<Curso> findByNombreContainingIgnoreCase(String nombreCurso); //containing para que busque esa palabra en cualquier parte del nombre

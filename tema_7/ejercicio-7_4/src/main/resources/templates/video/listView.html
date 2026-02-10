@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{/fragmentos.html::cabecera}"></head>
+  
+<body>
+  <nav th:replace="~{/fragmentos.html::menu}"></nav>
+
+  <h1>Listado de Vídeos</h1>
+ 
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th> <th>Descripción</th>
+        <th>Duración(seg.)</th> <th>Enlace Youtube</th> <th>Curso</th>
+        <th>Editar</th> <th>Borrar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="video : ${listaVideos}">
+        <td th:text="${video.id}">id</td>
+        <td th:text="${video.descripcion}">descripción</td>
+        <td th:text="${video.duracionSegundos}">duración segundos</td>
+        <td> <a th:href="${video.youtubeId}" target="_blank" th:text="${video.youtubeId}">enlace al video</a> </td>
+        <td th:text="${video.curso.getNombre()}">curso</td>
+        <td> <a th:href="@{/video/edit/{idVideo}(idVideo=${video.id})}">editar</a> </td>
+        <td> <a th:href="@{/video/delete/{idCurso}/{idVideo}(idCurso=${idCursoFijo}, idVideo=${video.id})}">borrar</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br><br>
+
+  <a th:href="@{/video/new/{idCurso}(idCurso=${idCursoFijo})}">Nuevo vídeo</a>
+
+  <div th:if="${msg!=null}">
+    <br>
+    <p class="alert alert-primary" role="alert" th:text="${msg}">err</p>
+  </div>
+
+</body>
+</html>
