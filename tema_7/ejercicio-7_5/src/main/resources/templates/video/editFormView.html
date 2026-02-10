@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video CRUD</title>
+    <style>.cssError{ background-color:red; }</style>
+  </head>
+  <body>
+    <h1>Editar video</h1>
+    <form method="post" action="#" th:action="@{/video/edit/submit/{idCurso}(idCurso=${idCursoFijo})}" th:object="${videoForm}">
+      <input type="hidden" id="id" th:field="*{id}" />
+
+      <label>Descripción:
+        <input type="text" id="descripcion" th:field="*{descripcion}" />
+        <span th:classappend="${#fields.hasErrors('descripcion')} ? 'cssError'" th:errors="*{descripcion}"></span>
+      </label><br/>
+
+      <label>Duración del vídeo (en segundos):
+        <input type="text" id="duracionSegundos" th:field="*{duracionSegundos}" />
+        <span th:classappend="${#fields.hasErrors('duracionSegundos')} ? 'cssError'" th:errors="*{duracionSegundos}"></span>
+      </label><br/>
+
+      <label>YouTube ID:
+        <input type="text" id="youtubeId" th:field="*{youtubeId}" />
+      </label><br/>
+
+      <br><br>
+
+      <input  type="submit" value="Enviar" />  
+
+      <br><br>
+
+      <a  th:href="@{/video/curso/{idCurso}(idCurso=${idCursoFijo})}">Volver</a>
+    </form>
+  </body>
+</html>

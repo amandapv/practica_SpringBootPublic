@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{/fragmentos.html::cabecera}"></head>
+  
+<body>
+  <nav th:replace="~{/fragmentos.html::menu}"></nav>
+
+  <form action="#" method="post" th:action="@{/video/new/submit/{idCurso}(idCurso=${idCursoFijo})}" th:object="${videoForm}">
+
+    <input type="hidden" id="id" th:field="*{id}"> <br>
+
+    <label>Descripción:
+      <input type="text" th:field="*{descripcion}">
+      <span th:classappend="${#fields.hasErrors('descripcion')} ? 'cssError'" th:errors="*{descripcion}"></span>
+    </label> <br><br>
+
+    <label>Duración del vídeo (en segundos):
+      <input type="number" id="duracionSegundos" th:field="*{duracionSegundos}">
+    </label> <br><br>
+
+    <label>YouTube ID:
+      <input type="text" id="youtubeId" th:field="*{youtubeId}">
+    </label> <br><br>
+
+
+    <input type="submit" value="Enviar">
+
+  </form>
+
+  <div th:if="${msg!=null}">
+    <br>
+    <p class="alert alert-danger" role="alert" th:text="${msg}">err</p>
+  </div> 
+
+  <br><br>
+
+  <a th:href="@{/}">Inicio</a><br/>
+
+</body>
+</html>
