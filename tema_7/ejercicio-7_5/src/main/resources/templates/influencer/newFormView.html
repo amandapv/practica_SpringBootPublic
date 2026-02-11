@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{/fragmentos.html::cabecera}"></head>
+  
+<body>
+  <nav th:replace="~{/fragmentos.html::menu}"></nav>
+
+  <form action="#" method="post" th:action="@{/influencer/new/submit}" th:object="${influencerForm}">
+
+    <input type="hidden" id="id" th:field="*{id}"> <br>
+
+    <label>Nombre usuario Instagram:
+      <input type="text" th:field="*{nombreInsta}">
+      <span th:classappend="${#fields.hasErrors('nombreInsta')} ? 'cssError'" th:errors="*{nombreInsta}"></span>
+    </label>
+
+    <br><br>
+
+    <input type="submit" value="Enviar">
+
+  </form>
+
+  <div th:if="${msg!=null}">
+    <br>
+    <p class="alert alert-danger" role="alert" th:text="${msg}">err</p>
+  </div> 
+
+  <br><br>
+
+  <a th:href="@{/influencer/}">Volver</a><br/>
+
+</body>
+</html>

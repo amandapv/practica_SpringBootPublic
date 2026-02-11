@@ -47,7 +47,7 @@ public class CursoServiceImplBD implements CursoService{
 
     //paso por parámetro un curso porque normalmente, cuando un usuario está en una página web para editar, ya ha rellenado un formulario, por eso no paso por parámetro el ID
     public Curso editar (Curso curso) throws RuntimeException{ //no hace falta poner RuntimeException, pero queda más claro para saber que sí se maneja si existe o no ese ID de curso (se maneja en el método obtenerPorId que llamamos aquí dentro)
-        obtenerPorId(curso.getId()); //obtenemos el curso llamando al método definido anteriormente pmos el curso llamando al método definido anteriormente para buscar un curso por su ID (este lanzará una excepción si no lo encuentra)... para buscar un curso por su ID (este lanzará una excepción si no lo encuentra)... ¿Qué devuelve?: Un Optional<T>. Esto es una "caja" que puede contener el objeto o estar vacía.
+        obtenerPorId(curso.getId()); //obtenemos el curso llamando al método definido anteriormente para buscar un curso por su ID (este lanzará una excepción si no lo encuentra)... para buscar un curso por su ID (este lanzará una excepción si no lo encuentra)... ¿Qué devuelve?: Un Optional<T>. Esto es una "caja" que puede contener el objeto o estar vacía.
         return repositorio.save(curso); //y lo guardamos
     }
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Influencer CRUD</title>
+    <style>.cssError{ background-color:red; }</style>
+  </head>
+  <body>
+    <h1>Editar influencer</h1>
+    <form method="post" action="#" th:action="@{/influencer/edit/submit}" th:object="${influencerForm}">
+      <input type="hidden" id="id" th:field="*{id}" />
+
+      <label>Nombre usuario Instagram:
+        <input type="text" id="nombreInsta" th:field="*{nombreInsta}" />
+        <span th:classappend="${#fields.hasErrors('nombreInsta')} ? 'cssError'" th:errors="*{nombreInsta}"></span>
+      </label><br/>
+
+      <br>
+
+      <h3>Elija un curso a promocionar:</h3>
+      <select id="curso">
+        <option value="">Seleccione un curso</option>
+        <option 
+          th:each="curso : ${listaCursos}"
+          th:value="${curso.nombre}" th:text="${curso.nombre}">
+        </option>
+      </select>
+
+      <br><br>
+
+      <input  type="submit" value="Enviar" />  
+
+      <br><br>
+
+      <a  th:href="@{/influencer/}">Volver</a>
+    </form>
+  </body>
+</html>

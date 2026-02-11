@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{/fragmentos.html::cabecera}"></head>
+  
+<body>
+  <nav th:replace="~{/fragmentos.html::menu}"></nav>
+
+  <h1>Listado de Influencers</h1>
+ 
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th> <th>Nombre usuario insta</th>
+        <th>Editar</th> <th>Borrar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="influencer : ${listaInfluencers}">
+        <td th:text="${influencer.id}">id</td>
+        <td> <a th:href="@{/influencer/{id}(id=${influencer.id})}" th:text="${influencer.nombreInsta}">nombre insta user</a> </td>
+        <!-- <td> <a th:href="${video.youtubeId}" target="_blank" th:text="${video.youtubeId}">enlace al video</a> </td> -->
+        <td> <a th:href="@{/influencer/edit/{idInflu}(idInflu=${influencer.id})}">editar</a> </td>
+        <td> <a th:href="@{/influencer/delete/{idInflu}(idInflu=${influencer.id})}">borrar</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br><br>
+
+  <a th:href="@{/influencer/new}">Nuevo influencer</a>
+
+  <div th:if="${msg!=null}">
+    <br>
+    <p class="alert alert-primary" role="alert" th:text="${msg}">err</p>
+  </div>
+
+</body>
+</html>

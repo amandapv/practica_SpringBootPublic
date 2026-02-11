@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Influencer CRUD</title>
+  </head>
+  <body>
+    <h1>Datos de influencer</h1>
+    <table>
+      <tbody>
+        <tr>  <td>Id:</td>	<td th:text="${influencer.id}">Id</td>  </tr>
+        <tr>  <td>Nombre usuario insta:</td><td th:text="${influencer.nombreInsta}">nombre user insta</td>  </tr>
+        <!-- <tr> Cursos promocionados</tr> -->
+        <tr>  <td><a th:href="@{/influencer/edit/{id}(id=${influencer.id})}">Editar</a>  </td>
+        <td>  <a th:href="@{/influencer/delete/{id}(id=${influencer.id})}">Borrar</a>
+        <a th:href="@{/influencer/}">Inicio</a></td></tr>
+      </tbody>
+    </table>
+  </body>
+</html>
