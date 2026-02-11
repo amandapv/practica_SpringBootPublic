@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{/fragmentos.html::cabecera}"></head>
+  
+<body>
+  <form action="#" method="post" th:action="@{/promocion/new/submit/{id}(id=${idInfluencer})}" th:object="${promocionForm}">
+
+    <input type="hidden" id="id" th:field="*{id}"> <br>
+
+    <label>Elije un curso a promocionar:
+      <select id="cursos" th:field="*{curso}">
+        <option value="">Todos</option>
+        <option th:each="curso : ${listaCursos}"
+                th:value="${curso.id}" th:text="${curso.nombre}">
+        </option>
+      </select>
+    </label>
+
+    <br>
+    <label>Remuneración de la promoción:
+      <input type="number" id="remuPromo" th:field="*{remuneracionPromoCurso}">
+      <span th:classappend="${#fields.hasErrors('remuneracionPromoCurso')} ? 'cssError'" th:errors="*{remuneracionPromoCurso}"></span>
+    </label>
+
+    <br><br>
+
+    <input type="submit" value="Enviar">
+
+  </form>
+
+  <br><br>
+
+  <a th:href="@{/influencer/}">Volver</a><br/>
+
+ <div th:if="${msg!=null}">
+    <br>
+    <p class="alert alert-primary" role="alert" th:text="${msg}">err</p>
+  </div>
+
+</body>
+</html>

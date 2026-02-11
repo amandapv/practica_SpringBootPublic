@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor //submitea un constructor para todos los campos
@@ -27,6 +28,7 @@ public class Promocion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "curso_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

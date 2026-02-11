@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor //Cr/editar/{id}/submitea un constructor para todos los campos
@@ -47,7 +48,7 @@ public class Curso {
     @ManyToOne
     private Autor autor; 
 
-    @ToStringExclude //para que no imprima en bucle al hacer el toString (imprimiría los vídeos, los que a su vez tienen un Curso asociado y los imprmiría y de nuevo se repetiría en bucle)
+    @ToString.Exclude //para que no imprima en bucle al hacer el toString (imprimiría los vídeos, los que a su vez tienen un Curso asociado y los imprmiría y de nuevo se repetiría en bucle)
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "curso", orphanRemoval = true) //fetch = FetchType.EAGER define la estrategia de carga de los datos: Si se pone la lista de vídeos como EAGER (lit.:ansioso/impaciente), siempre que busque un curso para mostrar sus detalles, los vídeos ya vendrán cargados dentro. Si fuera LAZY, Hibernate solo traería al Curso, la lista de vídeos se quedaría vacía (o como un "fantasma") hasta que se haga curso.getVideos(). Solo en ese momento, Hibernate iría a la base de datos a por ellos. MappedBy dice que no cree una tercera tabla (una tabla de unión), que la relación ya está definida en la columna "curso" que está dentro de la tabla Video (es decir, que hay un atributo "curso" en la tabla Video)
     private List<Video> videos = new ArrayList<>();
 }

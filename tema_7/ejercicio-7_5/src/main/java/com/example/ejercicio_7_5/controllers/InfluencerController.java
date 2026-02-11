@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ejercicio_7_5.domain.Curso;
 import com.example.ejercicio_7_5.domain.Influencer;
+import com.example.ejercicio_7_5.domain.Promocion;
 import com.example.ejercicio_7_5.services.CursoService;
 import com.example.ejercicio_7_5.services.InfluencerService;
+import com.example.ejercicio_7_5.services.PromocionService;
 
 import jakarta.validation.Valid;
 
@@ -27,6 +29,9 @@ public class InfluencerController {
 
     @Autowired
     private CursoService cursoService;
+
+    @Autowired
+    private PromocionService promocionService;
 
     private String txtMsg;
 
@@ -45,6 +50,7 @@ public class InfluencerController {
         try {
             Influencer influencer = influencerService.obtenerPorId(id);
             model.addAttribute("influencer", influencer);
+            model.addAttribute("listadoPromocionesByInflu", promocionService.mostrarPromocionPorInfluencer(id));
         } catch (Exception e) {
             txtMsg = e.getMessage();
             return "redirect:/influencer/list";
@@ -93,13 +99,13 @@ public class InfluencerController {
     }
 
     @PostMapping("/edit/submit")
-    public String showEditSubmit(@Valid @ModelAttribute("influencerForm") Influencer influencerForm, Curso curso, BindingResult bindingResult) {
+    public String showEditSubmit(@Valid @ModelAttribute("influencerForm") Influencer influencerForm, Curso curso, Promocion promocion, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "influencer/editFormView";
         }
         try {
             if (curso != null) {
-                //crear promocion con el ID de influencer + ID curso
+                promocionService.añadir(promocion);
             }
             influencerService.editar(influencerForm);
             txtMsg = "Operación realizada con éxito";            

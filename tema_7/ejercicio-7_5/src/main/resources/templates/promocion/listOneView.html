@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Influencer CRUD</title>
+    <title>Promoción CRUD</title>
   </head>
   <body>
-    <h1>Datos de influencer <span th:text="${influencer.nombreInsta}"></span> </h1>
+    <h1>Datos de la promoción <span th:text="${influencer.nombreInsta}"></span> </h1>
     <table>
       <tbody>
         <tr>  <td>Id:</td>	<td th:text="${influencer.id}">Id</td>  </tr>
@@ -18,31 +18,5 @@
         <a th:href="@{/influencer/}">Inicio</a></td></tr>
       </tbody>
     </table>
-
-    <br><br>
-    <hr>
-    <h4>Listado de cursos promocinados del Influencer: </h4>
-    <hr>
-    <table th:each="promo : ${listadoPromocionesByInflu}">
-      <tr>
-         <td>Curso:</td> 
-         <td th:text="${promo.curso.nombre}"></td> 
-      </tr>
-      <tr> 
-        <td>Remuneración de la promo: </td> 
-        <td th:text="${promo.remuneracionPromoCurso}"></td>
-      </tr>
-    </table>
-
-    <br><br>
-
-    <a th:href="@{/promocion/new/{idInfluencer}(idInfluencer=${influencer.id})}">Añadir curso promocionado</a>
-
-
-    <div th:if="${msg!=null}">
-      <br>
-      <p class="alert alert-primary" role="alert" th:text="${msg}">err</p>
-    </div>
-    
   </body>
 </html>

@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor //submitea un constructor para todos los campos
@@ -33,6 +34,7 @@ public class Video {
 
     private String youtubeId;
 
+    // @ToString.Exclude
     @NotNull(message = "Debes seleccionar un curso") //no me sirve un notBlank ni notEmpty porque el primero espera un String y le paso un objeto Curso y la segunda espera una colección
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE) //si solo dejo "CascadeType.ALL" en el Curso para que todas las sentencias se reflejen automáticamente en los videos (eliminar, añadir, actualizar...), entonces si desde la BBDD elimino un curso (sin pasar por Java es decir, por el JPA Hibernate) la propia BBDD se encarga de borrar los vídeos automáticamente. Si no tuviera esta línea, Y LO ELIMINO DESDE LA BBDD quedaría el video sin borrar (obviamente si lo elimino desde el JPA si que se eliminaría aunque no tuviera esta línea)
