@@ -1,12 +1,15 @@
 package com.example.ejercicio_7_7.services;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.ejercicio_7_7.domain.Curso;
+import com.example.ejercicio_7_7.domain.CursoDTO;
 import com.example.ejercicio_7_7.domain.Tematica;
 import com.example.ejercicio_7_7.repositories.CursoReporitory;
 
@@ -17,6 +20,9 @@ public class CursoServiceImplBD implements CursoService{
     
     @Autowired
     private CursoReporitory repositorio; //Ahora "repositorio" es un objeto de Acceso a Datos (DAO) (antes era un ArrayList)
+
+    @Autowired
+    private ModelMapper modelMapper; //llamo a mi modelMapper definido en la clase ModelMapperConfig en la carpeta config para poder convertir entidades a DTOs
 
     public List<Curso> obtenerTodos() {
         //devuelve todos los cursos que haya encontrado
@@ -71,4 +77,13 @@ public class CursoServiceImplBD implements CursoService{
     public List<Curso> filtrarImporteMenorIgualPrecio(Double precio) {
         return repositorio.findByPrecioLessThanEqual(precio);
     }
+
+    public List<CursoDTO> convertCursoToDto(List<Curso> listaCursos) {
+        List<CursoDTO> listaCursosDTO = new ArrayList<>(); //creo un nuevo arraylist donde meteré los cursos convertidos de entidades a DTOs
+        for(Curso curso : listaCursos) { 
+            listaCursosDTO.add(modelMapper.map(curso, CursoDTO.class)); //añado cada curso de la entidad al nuevo arraylist que serán DTOs
+        }
+        return listaCursosDTO; //retorno la lista de cursos DTO
+    }
+
 }

@@ -47,8 +47,7 @@
       <table>
         <thead>
           <tr>
-            <th>ID</th><th>Nombre</th>
-            <th>Precio</th><th>Autor</th>
+            <th>ID</th><th>Nombre</th><th>Autor</th>
             <th>Editar</th><th>Borrar</th>
           </tr>
         </thead>
@@ -56,8 +55,8 @@
           <tr th:each="curso : ${listaCursos}">
             <td th:text="${curso.id}">Id</td>
             <td><a th:href="@{/{id}(id=${curso.id})}" th:text="${curso.nombre}">nombre</a></td>
-            <td><a th:text="${curso.precio}">precio</a></td>
-            <td><a th:text="${curso.autor.nombre}">autor</a></td>
+            <!-- <td><a th:text="${curso.precio}">precio</a></td> -->
+            <td><a th:text="${curso.autorNombre}">nombre autor</a></td>
             <td><a th:href="@{/editar/{id}(id=${curso.id})}">Editar</a></td>        		
             <td><a th:href="@{/borrar/{id}(id=${curso.id})}">Borrar</a></td>        		
           </tr>

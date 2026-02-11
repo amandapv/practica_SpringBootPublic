@@ -3,6 +3,7 @@ package com.example.ejercicio_7_7.services;
 import java.util.List;
 
 import com.example.ejercicio_7_7.domain.Curso;
+import com.example.ejercicio_7_7.domain.CursoDTO;
 import com.example.ejercicio_7_7.domain.Tematica;
 
 public interface CursoService {
@@ -21,4 +22,6 @@ public interface CursoService {
     List<Curso> buscarPorTematica(Tematica tematica);
 
     List<Curso> filtrarImporteMenorIgualPrecio(Double precio);
+
+    List<CursoDTO> convertCursoToDto(List<Curso> listaCursos);
 }

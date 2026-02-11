@@ -1,5 +1,7 @@
 package com.example.ejercicio_7_7.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.ejercicio_7_7.domain.Autor;
 import com.example.ejercicio_7_7.domain.Curso;
 import com.example.ejercicio_7_7.domain.Tematica;
 import com.example.ejercicio_7_7.services.AutorService;
@@ -34,7 +35,9 @@ public class CursoController {
 
     @GetMapping({ "/", "/list" })
     public String showList(Model model) {
-        model.addAttribute("listaCursos", cursoService.obtenerTodos());
+        List<Curso> listaCursos = cursoService.obtenerTodos(); //obtenga la lista de cursos (de la entidad)...
+        model.addAttribute("listaCursos", cursoService.convertCursoToDto(listaCursos)); //... y convierto ese listado de cursos anterior en un listado de cursos de la clase DTO (es decir con los campos de esta nueva clase) y no de la entidad
+
         model.addAttribute("cursoForm", new Curso()); //hay que añadirle el curso porque en el archivo listView lo requiere para el filtro de la busqueda
         if (txtMsg != null) {
             model.addAttribute("msg", txtMsg);
@@ -124,15 +127,16 @@ public class CursoController {
 
     @PostMapping("/findByName")
     public String showFindByName(@ModelAttribute("cursoForm") Curso cursoForm, Model model) {
-        model.addAttribute("listaCursos", cursoService.buscarPorNombre(cursoForm.getNombre()));
+        List<Curso> listaCursos = cursoService.buscarPorNombre(cursoForm.getNombre()); //guardo en esta lista los cursos que encuentra por ese nombre
+        model.addAttribute("listaCursos", cursoService.convertCursoToDto(listaCursos)); //y convierto esa lista al DTO
         return "listView";
     }
 
 
     @GetMapping("/findByTematica/{tematica}")
     public String showFindByTematica(@PathVariable Tematica tematica, Model model) {
-
-        model.addAttribute("listaCursos", cursoService.buscarPorTematica(tematica));
+        List<Curso> listaCursos = cursoService.buscarPorTematica(tematica);
+        model.addAttribute("listaCursos", cursoService.convertCursoToDto(listaCursos));
         model.addAttribute("tematicaSeleccionada", tematica);
         model.addAttribute("cursoForm", new Curso());
         return "listView";
@@ -141,7 +145,8 @@ public class CursoController {
 
     @PostMapping("/findByPrecioLessThan")
     public String showFindByPrecioLessThan(@ModelAttribute("cursoForm") Curso curso, Model model) {
-        model.addAttribute("listaCursos", cursoService.filtrarImporteMenorIgualPrecio(curso.getPrecio()));
+        List<Curso> listaCursos = cursoService.filtrarImporteMenorIgualPrecio(curso.getPrecio());
+        model.addAttribute("listaCursos", cursoService.convertCursoToDto(listaCursos));
         return "listView";
     }
 }
