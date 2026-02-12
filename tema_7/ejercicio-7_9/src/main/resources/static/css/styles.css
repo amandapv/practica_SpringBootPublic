@@ -1,0 +1,61 @@
+th {
+    background-color: lightgray;
+    min-width: 250px;
+    max-width: 250px;
+    font-weight: bold;
+    font-size: large;
+    padding: 10px 0px;
+}
+
+td,
+th {
+    border-color: black;
+    border: 0.5px solid;
+}
+
+td {
+    background-color: rgb(208, 240, 252);
+    padding: 10px;
+}
+
+table {
+    border-spacing: 0px;
+    max-width: 75vw;
+    align-self: center;
+}
+
+.centrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+a{
+    color: black;
+    text-decoration: none;
+
+}
+
+.boton {
+    border-radius: 10px;
+    background-color: lightblue;
+    margin: 10px;
+    padding: 10px;
+    max-width: 110px;
+    display: flex;
+    justify-content: center;
+    border-color: black;
+    border: 2px solid;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.horizontales {
+    display: flex;
+    flex-direction: row;
+
+}

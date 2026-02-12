@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<br lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<table>
+    <legend>
+        <h1 class="centrar">Pacientes</h1>
+    </legend>
+    <thead>
+        <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Fecha De Nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="paciente : ${pacientes}" th:if="${paciente != null}">
+            <td class="centrar"><span th:text="${paciente.dni}"></span></td>
+            <td><span th:text="${paciente.nombre}"></span></td>
+            <td class="centrar"><span th:text="${paciente.fechaNacimiento}"></span></td>
+        </tr>
+    </tbody>
+</table>
+<div class="horizontales centrar">
+    <a class="boton" th:href="@{/atenderSiguiente}">Atender Paciente</a>
+    <a class="boton" th:href="@{/crearCliente}">Crear Cliente</a>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "medicamento",
+    "type": "java.lang.String",
+    "description": "A description for 'medicamento'"
+  },
+  {
+    "name": "revision.jubilado",
+    "type": "java.lang.String",
+    "description": "A description for 'revision.jubilado'"
+  },
+  {
+    "name": "revision",
+    "type": "java.lang.String",
+    "description": "A description for 'revision'"
+  },
+  {
+    "name": "tarifa",
+    "type": "java.lang.String",
+    "description": "A description for 'tarifa'"
+  }
+]}

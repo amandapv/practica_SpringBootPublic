@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cliente</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        function mostrarCampos() {
+            // Ocultar todos los campos específicos
+            document.getElementById('camposMedicamentos').style.display = 'none';
+            document.getElementById('camposRevision').style.display = 'none';
+            document.getElementById('camposTarifa').style.display = 'none';
+            
+            // Mostrar campos según el tipo seleccionado
+            var tipo = document.querySelector('input[name="tipoPaciente"]:checked').value;
+            if (tipo === 'medicamentos') {
+                document.getElementById('camposMedicamentos').style.display = 'block';
+            } else if (tipo === 'revision') {
+                document.getElementById('camposRevision').style.display = 'block';
+            } else if (tipo === 'tarifa') {
+                document.getElementById('camposTarifa').style.display = 'block';
+            }
+        }
+        
+        function prepararEnvio(event) {
+            // Obtener el tipo de paciente seleccionado
+            var tipo = document.querySelector('input[name="tipoPaciente"]:checked').value;
+            var datosExtraInput = document.getElementById('datosExtra');
+            
+            // Asignar el valor correcto según el tipo
+            if (tipo === 'medicamentos') {
+                datosExtraInput.value = document.getElementById('medicamentosInput').value;
+            } else if (tipo === 'revision') {
+                datosExtraInput.value = document.getElementById('fechaVisitaAnterior').value;
+            } else if (tipo === 'tarifa') {
+                datosExtraInput.value = document.getElementById('motivoConsulta').value;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Crear Nuevo Paciente</h1>
+    <form action="#" th:action="@{/crearCliente/submit}" th:object="${pacienteDTO}" method="post" onsubmit="prepararEnvio(event)">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" th:field="*{dni}" required /><br/><br/>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required /><br/><br/>
+
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="text" id="fechaNacimiento" th:field="*{fechaNacimiento}" placeholder="dd/mm/yyyy" required /><br/><br/>
+
+        <fieldset>
+            <legend>Tipo de Paciente:</legend>
+            <input type="radio" id="medicamentos" th:field="*{tipoPaciente}" value="medicamentos" onclick="mostrarCampos()" checked />
+            <label for="medicamentos">Cliente con Medicamentos</label><br/>
+            
+            <input type="radio" id="revision" th:field="*{tipoPaciente}" value="revision" onclick="mostrarCampos()" />
+            <label for="revision">Cliente de Revisión</label><br/>
+            
+            <input type="radio" id="tarifa" th:field="*{tipoPaciente}" value="tarifa" onclick="mostrarCampos()" />
+            <label for="tarifa">Cliente con Tarifa</label><br/>
+        </fieldset><br/>
+
+        <!-- Campo oculto para datosExtra que será enviado al servidor -->
+        <input type="hidden" id="datosExtra" th:field="*{datosExtra}" />
+
+        <!-- Campos específicos para Cliente con Medicamentos -->
+        <div id="camposMedicamentos" style="display: block;">
+            <label for="medicamentosInput">Medicamentos (separados por comas):</label>
+            <input type="text" id="medicamentosInput" placeholder="Ej: Paracetamol,Ibuprofeno" /><br/>
+        </div>
+
+        <!-- Campos específicos para Cliente de Revisión -->
+        <div id="camposRevision" style="display: none;">
+            <label for="fechaVisitaAnterior">Fecha de Visita Anterior:</label>
+            <input type="text" id="fechaVisitaAnterior" placeholder="dd/mm/yyyy" /><br/>
+        </div>
+
+        <!-- Campos específicos para Cliente con Tarifa -->
+        <div id="camposTarifa" style="display: none;">
+            <label for="motivoConsulta">Motivo de Consulta:</label>
+            <input type="text" id="motivoConsulta" placeholder="Describe el motivo" /><br/>
+        </div>
+
+        <br/>
+        <div class="horizontales">
+            <a th:href="@{/}"><button class="boton" type="button">Volver</button></a>
+            <button class="boton" type="submit">Crear Cliente</button>
+        </div>
+    </form>
+</body>
+</html>
+</body>
+</html>
