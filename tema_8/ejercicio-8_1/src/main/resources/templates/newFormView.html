@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style> .cssError {background-color: red;} </style>
+    <title>Curso CRUD</title>
+  </head>
+  <body>
+    <h1>Nuevo curso</h1>
+    <form method="post" action="#" th:action="@{/nuevo/submit}" th:object="${cursoForm}">
+            <!-- <label>Id: -->
+              <input type="hidden" id="id" th:field="*{id}" />
+              <!-- <input type="text" id="id" readonly th:field="*{id}" /> -->  <!-- otra opción para mostrar el ID sin que se pueda editar -->
+              <span th:classappend="${#fields.hasErrors('id')} ? 'cssError'" th:errors="*{id}"></span>
+            <!-- </label><br/> -->
+
+            <label>Nombre:
+              <input type="text" id="nombre" th:field="*{nombre}" />
+              <span th:classappend="${#fields.hasErrors('nombre')} ? 'cssError'" th:errors="*{nombre}"></span>
+            </label><br/>
+
+            <label>Precio:
+              <input type="text" id="precio" th:field="*{precio}" />
+              <span th:classappend="${#fields.hasErrors('precio')} ? 'cssError'" th:errors="*{precio}"></span>
+            </label><br/>
+
+            Temática:<br/>          
+            <div th:each="tem : ${T(com.example.ejercicio_8_1.domain.Tematica).values()}">
+                <input type="radio" name="button1" th:value="${tem}" th:text="${tem}" th:field="*{tematica}" />
+            </div>
+
+            <input  type="submit" value="Enviar" />
+    </form>
+    <br/>
+    <a  th:href="@{/}">Inicio</a><br/>
+  </body>
+</html>

@@ -1,11 +1,12 @@
-package com.example.ejercicio_7_7.repositories;
+package com.example.ejercicio_8_1.repositories;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import com.example.ejercicio_7_7.domain.Curso;
-import com.example.ejercicio_7_7.domain.Tematica;
+import com.example.ejercicio_8_1.domain.Curso;
+import com.example.ejercicio_8_1.domain.Tematica;
 
 public interface CursoReporitory extends JpaRepository<Curso, Long> {
 
