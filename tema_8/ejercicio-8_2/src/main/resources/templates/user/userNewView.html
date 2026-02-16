@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Nuevo usuario</h1>
+      <form method="post" action="#" th:action="@{/user/new/submit}" th:object="${usuarioDto}">
+        
+        <div class="mb-3">
+          <label for="id" class="form-label">ID</label>
+          <input type="hidden" id="id" th:field="*{id}" />
+        </div>
+
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" class="form-control" th:field="*{nombre}" />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" id="password" class="form-control" th:field="*{password}" />
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label">Rol</label><br/>
+          <div th:each="r : ${T(com.example.myapp.domain.Rol).values()}">
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" name="button1" th:value="${r}" th:text="${r}" th:field="*{rol}" />
+              <label class="form-check-label" th:text="${r}"></label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
