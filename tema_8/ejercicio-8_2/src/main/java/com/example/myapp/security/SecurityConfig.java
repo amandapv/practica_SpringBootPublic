@@ -56,13 +56,14 @@ public class SecurityConfig {
         http.authorizeHttpRequests( 
             auth -> 
             auth.requestMatchers("/user/**").hasRole("ADMIN")
+                .requestMatchers("/cuentas", "/movimientos/").permitAll()
                 .requestMatchers("/cuentas").hasAnyRole("ADMIN", "TITULAR", "USUARIO")
                 .requestMatchers("/movimientos/**").hasAnyRole("ADMIN", "TITULAR", "USUARIO")
                 .requestMatchers("/cuentas/**", "/movimientos/**").hasAnyRole("ADMIN", "TITULAR")
                 
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() //acceso a cualquiera a los recursos estáticos de la aplicación con nombre estándar
                 .requestMatchers("/h2-console/**").hasRole("ADMIN")
-                .requestMatchers("/cuentas/", "/movimientos/").permitAll()
+                
                 .anyRequest().authenticated()) //al resto de rutas le permito todo que estén autorizados
     
             .formLogin(formLogin -> formLogin.defaultSuccessUrl("/", true)) //permitir acceso a la ruta de /login a todo el mundo
