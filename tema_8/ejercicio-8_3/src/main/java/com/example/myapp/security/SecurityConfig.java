@@ -55,7 +55,8 @@ public class SecurityConfig {
             headersConfigurer -> headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         http.authorizeHttpRequests( 
             auth -> 
-            auth.requestMatchers("/user/**").hasRole("ADMIN")
+            auth // .requestMatchers("/registro/nuevo/**").permitAll()
+                .requestMatchers("/user/**").hasRole("ADMIN")
                 .requestMatchers("/cuentas", "/movimientos/").permitAll()
                 .requestMatchers("/cuentas").hasAnyRole("ADMIN", "TITULAR", "USUARIO")
                 .requestMatchers("/movimientos/**").hasAnyRole("ADMIN", "TITULAR", "USUARIO")
@@ -73,6 +74,7 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/", true).permitAll()) //la ruta por defecto al loguearse es / a la cual tiene acceso todo el mundo (/ redirige a /cuentas)
             .logout(logout -> logout
                     .logoutSuccessUrl("/signin?logout").permitAll()) //cuando se cierra la sesión irá a esa ruta y permitir acceso a todo el mundo
+            .rememberMe(Customizer.withDefaults()) //oopción para que recuerde la sesión del usuario, la guarda en una cookie
             .httpBasic(Customizer.withDefaults()); //Habilita la autenticación HTTP Basic con la configuración por defecto
         http.exceptionHandling(exceptions -> exceptions.accessDeniedPage("/accessError")); //en caso de los usuariosn o tengan permisos suficientes para acceder a x sitio redirige a esta ruta
         return http.build();
