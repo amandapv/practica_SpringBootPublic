@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Elige tu película favorita</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <style>
+      td {
+        border: 1px solid #ddd;
+      }
+      .cssError {
+        color: red;
+        border: 1px solid red;
+        width: 50%;
+      }
+      .cssError input {
+        border-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="#" method="post" th:action="@{/voto}" th:object="${form}">
+      <h1>Elige tu película favorita</h1>
+      <table>
+        <tr>
+          <td>
+            <img th:src="@{/avatar-portada-2.jpeg}" alt="Avatar" style="width: 200px"/>
+          </td>
+          <td>
+            <img src="/peli-cadena-perpetua.webp" alt="Cadena Perpetua" style="width: 200px"/>
+          </td>
+          <td>
+              <img src="/pulp-fiction-portada.jpg" alt="Pulp Fiction" style="width: 200px"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td th:each="voto : ${listadoVoto}"><i class="bi bi-heart"></i> <!-- recorrerse el listado de votos de cada foto -->
+            <span th:text="${voto}">0</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td th:each="voto, iterador : ${listadoVoto}">
+            <label>Voto:<input type="radio" name="votos" th:value="${iterador.index}" th:field="*{foto}"></label> <!-- uso iterador.index ya que index comienza en 0 y es lo que necesito para rellenar el atributo value del radio -->
+          </td>
+          <!-- otra opción sería no hacer un each y decirle directamente el valor del button que sea 0, 1 y 2, ya que mi arraylist tiene 3 posiciones: -->
+          <!-- <td>
+            <div>Voto: <input type="radio" value="0" name="voto" th:field="*{foto}"></input></div>
+          </td>
+          <td>
+            <div>Voto: <input type="radio" value="1" name="voto" th:field="*{foto}"></input></div>
+          </td>
+          <td>
+            <div>Voto: <input type="radio" value="2" name="voto" th:field="*{foto}"></input></div>
+          </td> -->
+        </tr>
+
+        <tr>
+          <!-- insertar el correo y comprobar que no tenga errores (que no esté vacío) -->
+          <td>
+            <label for="correo">Su email:</label>
+          </td>
+          <td colspan="2">
+            <input type="email" name="correoElect" id="correo" th:field="*{email}" style="width: 100%; box-sizing: border-box;">
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <input type="submit" value="Votar" style="width: 100%;">
+          </td>
+        </tr>
+      </table>
+
+      <br><br>
+
+      <!-- para mostrar los posibles errores... Exception-->
+      <div th:if="${txtErr!=null}">
+        <p class="alert alert-danger" role="alert" th:text="${txtErr}">error</p>
+      </div>
+
+      <!-- para mostrar los posibles errores... Validación-->
+       <div>
+        <div th:classappend="${#fields.hasErrors('email')} ? 'cssError'">
+          <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error: El email es obligatorio.</span>
+        </div>
+        <div th:classappend="${#fields.hasErrors('foto')} ? 'cssError'">
+          <span th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}">Error: La votación es obligatoria.</span>
+        </div>
+       </div>
+       
+    </form>
+
+  </body>
+</html>
