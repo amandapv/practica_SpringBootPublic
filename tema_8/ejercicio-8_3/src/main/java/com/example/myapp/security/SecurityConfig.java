@@ -66,8 +66,13 @@ public class SecurityConfig {
                 
                 .anyRequest().authenticated()) //al resto de rutas le permito todo que estén autorizados
     
-            .formLogin(formLogin -> formLogin.defaultSuccessUrl("/", true)) //permitir acceso a la ruta de /login a todo el mundo
-            .logout(logout -> logout.permitAll()) //permitir acceso a la ruta de /logout a todo el mundo
+            .formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
+                    .loginPage("/login") //mapping para mostrar el formulario de login (la que tengo definida en mi controlador)
+                    .loginProcessingUrl("/login") //ruta post de /signin (a donde procesa mi ruta personalizada /signin)
+                    .failureUrl("/login?error") //vuelve a /signin con mensaje de error
+                    .defaultSuccessUrl("/", true).permitAll()) //la ruta por defecto al loguearse es / a la cual tiene acceso todo el mundo (/ redirige a /cuentas)
+            .logout(logout -> logout
+                    .logoutSuccessUrl("/signin?logout").permitAll()) //cuando se cierra la sesión irá a esa ruta y permitir acceso a todo el mundo
             .httpBasic(Customizer.withDefaults()); //Habilita la autenticación HTTP Basic con la configuración por defecto
         http.exceptionHandling(exceptions -> exceptions.accessDeniedPage("/accessError")); //en caso de los usuariosn o tengan permisos suficientes para acceder a x sitio redirige a esta ruta
         return http.build();
