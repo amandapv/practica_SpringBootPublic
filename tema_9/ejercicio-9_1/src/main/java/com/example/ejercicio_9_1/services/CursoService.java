@@ -1,0 +1,24 @@
+package com.example.ejercicio_9_1.services;
+
+import java.util.List;
+
+import com.example.ejercicio_9_1.domain.Curso;
+import com.example.ejercicio_9_1.domain.Tematica;
+
+public interface CursoService {
+    Curso añadir(Curso curso);
+
+    List<Curso> obtenerTodos();
+
+    Curso obtenerPorId(long id) ;
+
+    Curso editar(Curso curso) ;
+
+    void borrar(long id);
+
+    List<Curso> buscarPorNombre(String textoNombre);
+
+    List<Curso> buscarPorTematica(Tematica tematica);
+
+    List<Curso> filtrarImporteMenorIgualPrecio(Double precio);
+}
