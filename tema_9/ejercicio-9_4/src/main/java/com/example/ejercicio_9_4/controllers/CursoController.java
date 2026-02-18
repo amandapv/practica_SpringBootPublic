@@ -1,5 +1,6 @@
 package com.example.ejercicio_9_4.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ejercicio_9_4.domain.Curso;
 import com.example.ejercicio_9_4.domain.Tematica;
+import com.example.ejercicio_9_4.dto.CursoDto;
+import com.example.ejercicio_9_4.dto.CursoNuevoDto;
+import com.example.ejercicio_9_4.services.CursoDtoConverter;
 import com.example.ejercicio_9_4.services.CursoService;
 
 import jakarta.validation.Valid;
@@ -26,14 +30,21 @@ public class CursoController {
     @Autowired
     public CursoService cursoService;
 
+    @Autowired
+    private CursoDtoConverter cursoDtoConverter;
+
     @GetMapping("/curso")
     public ResponseEntity<?> getList() {
         List<Curso> listaCursos = cursoService.obtenerTodos();
         if (listaCursos.isEmpty()) {
             return ResponseEntity.notFound().build(); //devuelve el código 404 (Not found)
         } else {
+            List<CursoDto> listaCursoDtos = new ArrayList<>();
+            for(Curso curso : listaCursos) {
+                listaCursoDtos.add(cursoDtoConverter.convertCursoToDto(curso));
+            }
             // return ResposeEntity.status(HttpStatus.OK).body(listaCursos);  //en vez de hacerlo como abajo también se podría hacer así
-            return ResponseEntity.ok(listaCursos); //devuelve el código 200 (OK)
+            return ResponseEntity.ok(listaCursoDtos); //devuelve el código 200 (OK)
         }
     }
 
@@ -43,26 +54,28 @@ public class CursoController {
         if (curso == null) {
             return ResponseEntity.notFound().build();
         } else {
-            return ResponseEntity.ok(curso);
+            return ResponseEntity.ok(cursoDtoConverter.convertCursoToDto(curso)); //le paso el dto
         }
     }
 
     @PostMapping("/curso")
-    public ResponseEntity<?> newElement(@Valid @RequestBody Curso nuevoCurso) {
+    public ResponseEntity<?> newElement(@Valid @RequestBody CursoNuevoDto nuevoCursoDto) {
         //@Valid si no se cumple la validación devuelve BAD_REQUEST y devuelve el código 400
-        Curso curso = cursoService.añadir(nuevoCurso);
-        return ResponseEntity.status(HttpStatus.CREATED).body(curso);
+        Curso curso = cursoDtoConverter.convertCursoDtoToCurso(nuevoCursoDto);
+        Curso cursoSaved = cursoService.añadir(curso);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cursoSaved); //personalmente debería devolver un CursoDto y no Curso (tras haberlo guardado en la BBDD) ya que es lo que vuelves a mostrar al usuario
     }
 
     @PutMapping("/curso/{id}")
-    public ResponseEntity<?> editElement(@PathVariable Long id, @Valid @RequestBody Curso editCurso) {
+    public ResponseEntity<?> editElement(@PathVariable Long id, @Valid @RequestBody CursoNuevoDto editCursoDto) {
         //@Valid si no se cumple la validación devuelve BAD_REQUEST y devuelve el código 400
         Curso curso = cursoService.obtenerPorId(id);
         if (curso == null) {
             return ResponseEntity.notFound().build();
         } else {
-            curso = cursoService.editar(editCurso); //si encuentro el curso que me llega por ese id lo edito
-            return ResponseEntity.ok(curso);
+            curso = cursoDtoConverter.convertCursoDtoToCursoEdit(editCursoDto, id);
+            Curso cursoSaved = cursoService.editar(curso); //guardo el curso en la BBDD y se lo paso al responseEntity
+            return ResponseEntity.ok(cursoSaved);
         }
     }
 
@@ -83,7 +96,11 @@ public class CursoController {
         if (listaCursos.isEmpty()) { //si el listado está vacío (es decir, no encontró nada por ese nombre)... 
             return ResponseEntity.notFound().build(); //retorna un 404
         } else { 
-            return ResponseEntity.ok(listaCursos); //si encontró algún curso por ese nombre retorna el listado de ellos con un 200
+            List<CursoDto> listaCursosDto = new ArrayList<>();
+            for(Curso curso : listaCursos) {
+                listaCursosDto.add(cursoDtoConverter.convertCursoToDto(curso));
+            }
+            return ResponseEntity.ok(listaCursosDto); //si encontró algún curso por ese nombre retorna el listado de ellos (PERO EL DTO) con un 200
         }
     }
 
@@ -93,7 +110,11 @@ public class CursoController {
         if (listaCursos.isEmpty()) {
             return ResponseEntity.notFound().build(); //retorna un 404
         } else {
-            return ResponseEntity.ok(listaCursos); //si encontró algún curso por ese nombre retorna el listado de ellos con un 200
+            List<CursoDto> listaCursosDto = new ArrayList<>();
+            for(Curso curso : listaCursos) {
+                listaCursosDto.add(cursoDtoConverter.convertCursoToDto(curso));
+            }
+            return ResponseEntity.ok(listaCursosDto); //si encontró algún curso por ese nombre retorna el listado de ellos con un 200
         }
     }
 
@@ -103,7 +124,11 @@ public class CursoController {
         if (listaCursos.isEmpty()) {
             return ResponseEntity.notFound().build(); //retorna un 404
         } else {
-            return ResponseEntity.ok(listaCursos); //si encontró algún curso por ese nombre retorna el listado de ellos con un 200
+            List<CursoDto> listaCursosDto = new ArrayList<>();
+            for(Curso curso : listaCursos) {
+                listaCursosDto.add(cursoDtoConverter.convertCursoToDto(curso));
+            }
+            return ResponseEntity.ok(listaCursosDto); //si encontró algún curso por ese nombre retorna el listado de ellos con un 200
         }
     }
 }
