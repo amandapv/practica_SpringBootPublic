@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="#" method="post" th:action="@{/cotizacion/submit}" th:object="${formConversion}">
+
+        <label>importe:
+            <input type="number" id="importe" th:field="*{importe}">
+        </label> <br>
+
+        <label>Moneda origen:
+            <select id="origen" th:field="*{monedaOrigen}">
+                <option value="EUR">Euro</option> 
+                <option value="GBP">Libra esterlina</option>
+                <option value="JPY">Yen</option>
+                <option value="USD">Dolar USA</option>
+            </select>
+        </label>
+
+        <label>Moneda destino:
+            <select id="destino" th:field="*{monedaDestino}">
+                <option value="EUR">Euro</option> 
+                <option value="GBP">Libra esterlina</option>
+                <option value="JPY">Yen</option>
+                <option value="USD">Dolar USA</option>
+            </select>
+        </label><br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    <h3>RESULTADO CONVERSIÓN:</h3>
+    <p th:text="${conversionMonedas}"></p>
+
+</body>
+</html>
